@@ -3,10 +3,10 @@ package com.natixis.chatdonback.entity;
 import javax.persistence.*;
 
 @Entity
-public class Candidat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Candidat extends Utilisateur {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private String typeHebergement;
 
@@ -26,13 +26,13 @@ public class Candidat {
 //    @OneToMany(mappedBy = "")
 //    List<Candidature> candidatures;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
 
     public String getTypeHebergement() {
         return typeHebergement;
