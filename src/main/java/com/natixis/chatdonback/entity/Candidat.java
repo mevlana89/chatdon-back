@@ -18,21 +18,13 @@ public class Candidat extends Utilisateur {
 
     private boolean sociableChien;
 
-    // à voir : une liste d'age d'enfant
-//    @OneToMany(mappedBy = "")
-//    private List<AgeEnfant> ageEnfant = new ArrayList<>();
+    private int nbEnfant;
+
+    private int ageBenjamin;
 
     //TODO à ajouter une fois la classe Candidature créée
 //    @OneToMany(mappedBy = "")
 //    List<Candidature> candidatures;
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
 
     public String getTypeHebergement() {
         return typeHebergement;
@@ -72,5 +64,21 @@ public class Candidat extends Utilisateur {
 
     public void setSociableChien(boolean sociableChien) {
         this.sociableChien = sociableChien;
+    }
+
+    public int getNbEnfant() {
+        return nbEnfant;
+    }
+
+    public void setNbEnfant(int nbEnfant) {
+        this.nbEnfant = nbEnfant;
+    }
+
+    public int getAgeBenjamin() {
+        return ageBenjamin;
+    }
+
+    public void setAgeBenjamin(int ageBenjamin) {
+        this.ageBenjamin = ageBenjamin;
     }
 }

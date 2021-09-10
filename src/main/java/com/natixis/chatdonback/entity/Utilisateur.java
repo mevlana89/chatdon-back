@@ -2,12 +2,12 @@ package com.natixis.chatdonback.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS )
-public abstract class Utilisateur {
+
+@MappedSuperclass
+public class Utilisateur {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nom;
@@ -16,7 +16,7 @@ public abstract class Utilisateur {
 
     private String mail;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Adresse adresse;
 
     private String telephone;
