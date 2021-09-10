@@ -15,30 +15,15 @@ public class CandidatController {
     private CandidatService candidatService;
 
     @PostMapping()
-    public void createCandidat(CreateCandidatDto createCandidatDto)
+    public void createCandidat(@RequestBody CreateCandidatDto createCandidatDto)
     {
-        Candidat candidat = new Candidat();
         //MAPPER
-        candidatService.createCandidat (candidat);
+        candidatService.createCandidat (createCandidatDto);
     }
     @GetMapping()
     public void testCreateCandidat()
     {
-        Candidat candidat = new Candidat();
-        Adresse adresse = new Adresse();
-        adresse.setCodePostal(75000);
-        adresse.setRue("15 rue de la paix");
-        adresse.setVille("Paris");
-        candidat.setPresenceJardin(false);
-        candidat.setSociableChat(false);
-        candidat.setSociableChien(false);
-        candidat.setTypeHebergement("test");
-        candidat.setNom("ERGUN");
-        candidat.setPrenom("Mustafa");
-        // a faire car erreur flushing ...
-        // candidat.setAdresse(adresse);
-
-        //MAPPER
-        candidatService.createCandidat (candidat);
+        CreateCandidatDto createCandidatDto = new CreateCandidatDto();
+        candidatService.createCandidat (createCandidatDto);
     }
 }
