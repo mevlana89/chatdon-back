@@ -1,11 +1,20 @@
 package com.natixis.chatdonback.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Slf4j
 public class Adresse {
 
     @Id
@@ -16,35 +25,4 @@ public class Adresse {
     private int CodePostal;
     private String ville;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getRue() {
-        return rue;
-    }
-
-    public void setRue(String rue) {
-        this.rue = rue;
-    }
-
-    public int getCodePostal() {
-        return CodePostal;
-    }
-
-    public void setCodePostal(int codePostal) {
-        CodePostal = codePostal;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
 }

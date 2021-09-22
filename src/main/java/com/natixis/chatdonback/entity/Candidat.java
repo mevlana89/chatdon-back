@@ -1,12 +1,18 @@
 package com.natixis.chatdonback.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Slf4j
 public class Candidat extends Utilisateur {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     private String typeHebergement;
 
@@ -23,62 +29,7 @@ public class Candidat extends Utilisateur {
     private int ageBenjamin;
 
     //TODO à ajouter une fois la classe Candidature créée
-//    @OneToMany(mappedBy = "")
-//    List<Candidature> candidatures;
+    //    @OneToMany(mappedBy = "")
+    //    List<Candidature> candidatures;
 
-    public String getTypeHebergement() {
-        return typeHebergement;
-    }
-
-    public void setTypeHebergement(String typeHebergement) {
-        this.typeHebergement = typeHebergement;
-    }
-
-    public int getSurfaceHebergement() {
-        return surfaceHebergement;
-    }
-
-    public void setSurfaceHebergement(int surface) {
-        this.surfaceHebergement = surface;
-    }
-
-    public boolean isPresenceJardin() {
-        return presenceJardin;
-    }
-
-    public void setPresenceJardin(boolean presenceJardin) {
-        this.presenceJardin = presenceJardin;
-    }
-
-    public boolean isSociableChat() {
-        return sociableChat;
-    }
-
-    public void setSociableChat(boolean sociableChat) {
-        this.sociableChat = sociableChat;
-    }
-
-    public boolean isSociableChien() {
-        return sociableChien;
-    }
-
-    public void setSociableChien(boolean sociableChien) {
-        this.sociableChien = sociableChien;
-    }
-
-    public int getNbEnfant() {
-        return nbEnfant;
-    }
-
-    public void setNbEnfant(int nbEnfant) {
-        this.nbEnfant = nbEnfant;
-    }
-
-    public int getAgeBenjamin() {
-        return ageBenjamin;
-    }
-
-    public void setAgeBenjamin(int ageBenjamin) {
-        this.ageBenjamin = ageBenjamin;
-    }
 }
