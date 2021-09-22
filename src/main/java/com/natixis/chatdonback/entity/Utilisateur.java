@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @MappedSuperclass
-public class Utilisateur {
+public abstract class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
