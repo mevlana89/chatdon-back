@@ -34,8 +34,9 @@ public class CandidatService {
         adresse.setCodePostal(75000);
         adresse.setRue("15 rue de la paix");
         adresse.setVille("Paris");
+        adresse.setRue("");
         candidat.setPresenceJardin(false);
-        candidat.setSociableChat(false);
+        candidat.setSociableChat(true);
         candidat.setSociableChien(false);
         candidat.setTypeHebergement("test");
         candidat.setNom("ERGUN");
