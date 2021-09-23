@@ -1,7 +1,9 @@
 package com.natixis.chatdonback.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.natixis.chatdonback.dto.FilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,9 @@ public class ChatService {
         }
         throw new Exception("not found");
     }
-    
+
+    public List<Chat> findAllUnreservedCats(FilterDto filterDto)
+    {
+        return chatRepo.findAll();
+    }
 }
