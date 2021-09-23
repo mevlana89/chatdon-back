@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,7 +48,8 @@ public class Chat {
     
     private boolean sociableChien;
     
-    @OneToMany(targetEntity = PhotoChat.class)
+    @OneToMany(mappedBy = "chatId")
+    @JsonManagedReference
     private List<PhotoChat> lstPhotos;
     
     void test() {
