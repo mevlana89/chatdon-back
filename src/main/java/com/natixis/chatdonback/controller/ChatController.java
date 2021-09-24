@@ -1,5 +1,9 @@
 package com.natixis.chatdonback.controller;
 
+import com.natixis.chatdonback.dto.FilterDto;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,11 +31,18 @@ public class ChatController {
         System.out.println("getChatById : " + id);
             try
             {
+
                 return chatService.getChatById(id);
             } catch (Exception ex) {
                 System.out.println("Exception getChaById : " + ex.getMessage());
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Chat non trouvé pour id "+id);
             }
+    }
+
+    @GetMapping("/chats/")
+    public List <Chat> getAllUnreservedCats(FilterDto filterDto)
+    {
+        return chatService.findAllUnreservedCats(filterDto);
     }
     
     @Autowired
