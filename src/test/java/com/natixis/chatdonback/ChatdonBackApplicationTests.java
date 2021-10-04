@@ -1,6 +1,10 @@
 package com.natixis.chatdonback;
 
+<<<<<<< HEAD
 
+=======
+// import org.junit.Assert;
+>>>>>>> ece8a6369703342c39c006c2ec08e4b0f3692373
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +29,11 @@ class ChatdonBackApplicationTests {
     	donateur.setNom("donateur_nom");
     	donateur.setPrenom("donateur.prenom");
     	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
+<<<<<<< HEAD
 
+=======
+    	//Assert.assertEquals(donateur.getNom(), createDonateurDto.getNom());
+    	//Assert.assertEquals(donateur.getPrenom(), createDonateurDto.getPrenom());
+>>>>>>> ece8a6369703342c39c006c2ec08e4b0f3692373
     }
 }

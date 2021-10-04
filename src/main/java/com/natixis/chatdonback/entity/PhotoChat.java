@@ -15,11 +15,10 @@ public class PhotoChat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "chat_id")
+    
+    @ManyToOne
     @JsonBackReference
-    private Chat chatId;
+    private Chat chat;
     
     private String cheminPhoto;
 }

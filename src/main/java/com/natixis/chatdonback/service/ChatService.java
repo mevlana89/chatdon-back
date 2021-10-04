@@ -7,12 +7,14 @@ import com.natixis.chatdonback.dto.FilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.natixis.chatdonback.dto.CreateChatDto;
 import com.natixis.chatdonback.entity.Chat;
+import com.natixis.chatdonback.mapper.ChatMapper;
 import com.natixis.chatdonback.repository.ChatRepository;
 
 @Service
 public class ChatService {
-
+    
     @Autowired
     private ChatRepository chatRepo;
     
@@ -23,6 +25,11 @@ public class ChatService {
         }
         throw new Exception("not found");
     }
+
+    public Chat createChat(CreateChatDto chatDto) {
+        return chatRepo.save(ChatMapper.INSTANCE.chatDtoToEntity(chatDto));
+    }
+    
 
     public List<Chat> findAllUnreservedCats(FilterDto filterDto)
     {
