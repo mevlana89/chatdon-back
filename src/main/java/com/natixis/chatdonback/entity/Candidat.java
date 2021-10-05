@@ -1,11 +1,13 @@
 package com.natixis.chatdonback.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,8 +30,13 @@ public class Candidat extends Utilisateur {
 
     private int ageBenjamin;
 
+
+
     //TODO à ajouter une fois la classe Candidature créée
-    //    @OneToMany(mappedBy = "")
+    //    @OneToMany(mappedBy = "Candidature")
     //    List<Candidature> candidatures;
+
+
+
 
 }
