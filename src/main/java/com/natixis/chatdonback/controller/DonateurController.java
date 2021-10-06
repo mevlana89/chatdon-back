@@ -31,8 +31,8 @@ public class DonateurController {
 	public void testCreateDonateur() {
 		CreateDonateurDto donnateurDtoTest = new CreateDonateurDto();
 		AdresseDTO adresseDto = new AdresseDTO();
-		donnateurDtoTest.setNom("dupond");
-		donnateurDtoTest.setPrenom("jean");
+		donnateurDtoTest.setNom("Dupond");
+		donnateurDtoTest.setPrenom("Jean");
 		donnateurDtoTest.setMail("dupond.jean@orange.fr");
 		donnateurDtoTest.setMotDePasse("mdp");
 		donnateurDtoTest.setTelephone("00-00-00-00");
@@ -43,6 +43,5 @@ public class DonateurController {
 		donateurService.createDonateur(donnateurDtoTest);
 		
 	}
-	
 		
 }
