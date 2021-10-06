@@ -47,7 +47,6 @@ public class DonateurController {
 		donateurService.createDonateur(donnateurDtoTest);
 	}
 
-	
 	@DeleteMapping("/donateurs/{id}")
 	public void deleteDonateurById(@PathVariable Long id){
 	    System.out.println("delete donateur : " + id);
