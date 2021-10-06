@@ -4,7 +4,7 @@ package com.natixis.chatdonback;
 // import org.junit.Assert;
 
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
+// import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.natixis.chatdonback.dto.CreateDonateurDto;
@@ -14,7 +14,7 @@ import com.natixis.chatdonback.mapper.DonateurMapper;
 @SpringBootTest
 class ChatdonBackApplicationTests {
 
-	private DonateurMapper donateurMapper = Mappers.getMapper(DonateurMapper.class);
+//	private DonateurMapper donateurMapper = Mappers.getMapper(DonateurMapper.class);
 	
     @Test
     void contextLoads() {
@@ -26,8 +26,14 @@ class ChatdonBackApplicationTests {
     	Donateur donateur = new Donateur();
     	donateur.setNom("donateur_nom");
     	donateur.setPrenom("donateur.prenom");
+<<<<<<< Updated upstream
     	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
 
+||||||| constructed merge base
+    	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
+=======
+    //	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
+>>>>>>> Stashed changes
     	//Assert.assertEquals(donateur.getNom(), createDonateurDto.getNom());
     	//Assert.assertEquals(donateur.getPrenom(), createDonateurDto.getPrenom());
 

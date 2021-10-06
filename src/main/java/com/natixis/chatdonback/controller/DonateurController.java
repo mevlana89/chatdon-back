@@ -1,6 +1,6 @@
 package com.natixis.chatdonback.controller;
 
-import org.mapstruct.factory.Mappers;
+// import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
