@@ -25,4 +25,8 @@ public class DonateurService {
 		donateurRepository.deleteById(id);
 	}
 	
+	public Donateur getDonateurById(Long id) {
+		return donateurRepository.findById(id).get();		
+	}
+	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.natixis.chatdonback.dto.AdresseDTO;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
 import com.natixis.chatdonback.entity.Adresse;
+import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.service.DonateurService;
 
@@ -31,7 +32,26 @@ public class DonateurController {
 		donateurService.createDonateur(donateurDto);
 	}
 
-	@GetMapping("/donateurs")
+	@GetMapping("/donateurs/{id}")
+	public Donateur getDonateurById(@PathVariable Long id){
+        System.out.println("getDonateurById : " + id);
+        try
+        {
+
+            return donateurService.getDonateurById(id);
+        } catch (Exception ex) {
+            System.out.println("Exception getDonateurById : " + ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "donateur non trouvé pour id "+id);
+        }
+	}
+	
+	@DeleteMapping("/donateurs/{id}")
+	public void deleteDonateurById(@PathVariable Long id){
+	    System.out.println("delete donateur : " + id);
+	    donateurService.deleteDonateurById(id);   
+	}
+	
+	@GetMapping("/TestCreationDonateur")
 	public void testCreateDonateur() {
 		CreateDonateurDto donnateurDtoTest = new CreateDonateurDto();
 		AdresseDTO adresseDto = new AdresseDTO();
@@ -46,10 +66,9 @@ public class DonateurController {
 		donnateurDtoTest.setAdresseDto(adresseDto);
 		donateurService.createDonateur(donnateurDtoTest);
 	}
-
-	@DeleteMapping("/donateurs/{id}")
-	public void deleteDonateurById(@PathVariable Long id){
-	    System.out.println("delete donateur : " + id);
-	    donateurService.deleteDonateurById(id);   
+	
+	@GetMapping("/TestDeleteDonateur/{id}")
+	public void testDeleteDonateurById(@PathVariable Long id) {
+		donateurService.deleteDonateurById(id);
 	}
 }
