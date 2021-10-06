@@ -21,6 +21,7 @@ public class DonateurMapper {
         }
 
         Donateur donateur = new Donateur();
+        System.out.println("mapper dto to entity");
 
         donateur.setNom( createDonateurDto.getNom() );
         donateur.setPrenom( createDonateurDto.getPrenom() );
@@ -30,10 +31,12 @@ public class DonateurMapper {
         
         AdresseDTO adDto = createDonateurDto.getAdresseDto();
         Adresse ad = new Adresse();
-        ad.setRue( adDto.getRue() );
-        ad.setVille( adDto.getVille() );
-        ad.setCodePostal( adDto.getCodePostal() ) ;
-        donateur.setAdresse( ad );
+//        System.out.println("affichage adresse");
+//        System.out.println("Rue : "+ adDto.getRue());
+//        ad.setRue( adDto.getRue() );
+//        ad.setVille( adDto.getVille() );
+//        ad.setCodePostal( adDto.getCodePostal() ) ;
+//        donateur.setAdresse( ad );
         
         List<Chat> list = createDonateurDto.getChatsProposes();
         if ( list != null ) {
@@ -48,6 +51,8 @@ public class DonateurMapper {
         }
 
         CreateDonateurDto createDonateurDto = new CreateDonateurDto();
+        
+        System.out.println("mapper entity to dto");
 
         createDonateurDto.setNom( donateur.getNom() );
         createDonateurDto.setPrenom( donateur.getPrenom() );
@@ -55,7 +60,7 @@ public class DonateurMapper {
         createDonateurDto.setTelephone( donateur.getTelephone() );
         createDonateurDto.setMotDePasse( donateur.getMotDePasse() ); 
 
-        
+        System.out.println("mapper adresse");
         Adresse ad = donateur.getAdresse();
         AdresseDTO adDto = new AdresseDTO();
         adDto.setRue( ad.getRue() );
@@ -63,6 +68,7 @@ public class DonateurMapper {
         adDto.setCodePostal( ad.getCodePostal() ) ;
         createDonateurDto.setAdresseDto( adDto );
         
+        System.out.println("mapper chatsproposes");
         List<Chat> list = donateur.getChatsProposes();
         if ( list != null ) {
         	createDonateurDto.setChatsProposes( new ArrayList<Chat>( list ) );
