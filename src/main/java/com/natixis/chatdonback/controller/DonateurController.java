@@ -2,11 +2,15 @@ package com.natixis.chatdonback.controller;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
@@ -41,7 +45,12 @@ public class DonateurController {
 		adresseDto.setVille("paris");
 		donnateurDtoTest.setAdresseDto(adresseDto);
 		donateurService.createDonateur(donnateurDtoTest);
-		
 	}
-		
+
+	
+	@DeleteMapping("/donateurs/{id}")
+	public void deleteDonateurById(@PathVariable Long id){
+	    System.out.println("delete donateur : " + id);
+	    donateurService.deleteDonateurById(id);   
+	}
 }

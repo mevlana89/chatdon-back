@@ -18,7 +18,11 @@ public class DonateurService {
 	private DonateurMapper donateurMapper;
 	
 	public Donateur createDonateur(CreateDonateurDto  createDonateurDto) {
-			return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
+		return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
+	}
+	
+	public void deleteDonateurById(Long id) {
+		donateurRepository.deleteById(id);
 	}
 	
 }
