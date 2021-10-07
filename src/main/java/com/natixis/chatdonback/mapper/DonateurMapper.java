@@ -1,6 +1,5 @@
 package com.natixis.chatdonback.mapper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

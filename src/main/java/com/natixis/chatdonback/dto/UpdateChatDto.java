@@ -1,15 +1,17 @@
 package com.natixis.chatdonback.dto;
 
-import java.util.List;
-
 import com.natixis.chatdonback.entity.Donateur;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class CreateChatDto {
+public class UpdateChatDto {
+
+    private int id;
 
     private String nom;
     
@@ -38,5 +40,4 @@ public class CreateChatDto {
     private List<CreatePhotoChatDto> lstPhotos;
 
     private Donateur donateur;
-
 }

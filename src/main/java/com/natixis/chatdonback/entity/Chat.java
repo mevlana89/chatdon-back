@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,7 +56,8 @@ public class Chat {
     @OneToMany(mappedBy="chat", cascade=CascadeType.ALL)
     @JsonManagedReference
     private List<PhotoChat> lstPhotos;
-    
+
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
     @JoinColumn(name = "donateur_id", nullable = false)
     private Donateur donateur;
