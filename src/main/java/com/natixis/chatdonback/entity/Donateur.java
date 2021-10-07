@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Donateur extends Utilisateur {
 	
 	 //TODO à ajouter une fois la classe CHATS créée
 	 @OneToMany(mappedBy = "donateur", cascade = CascadeType.ALL)
+     @JsonManagedReference
 	 private List<Chat> chatsProposes;
 	
     void test1() {
