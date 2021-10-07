@@ -21,6 +21,7 @@ public class Donateur extends Utilisateur {
 	 //TODO à ajouter une fois la classe CHATS créée
      @JsonManagedReference
 	 @OneToMany(mappedBy = "donateur", cascade = CascadeType.ALL)
+     @JsonManagedReference
 	 private List<Chat> chatsProposes;
 	
     void test1() {
