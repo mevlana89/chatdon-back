@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface DonateurRepository extends JpaRepository<Donateur,Long> {
 
+    Donateur getDonateurByMail(String nom);
 }

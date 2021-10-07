@@ -20,5 +20,19 @@ public class DonateurService {
 	public Donateur createDonateur(CreateDonateurDto  createDonateurDto) {
 			return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
 	}
-	
+
+	public Donateur getDonateurByMail(String nom) {
+		return donateurRepository.getDonateurByMail(nom);
+	}
+
+	public String chkDonateurByMail(String nom, String pass) {
+		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+		if (donateur != null) {
+			if (donateur.getMotDePasse().equals(pass)) {
+				return "Donateur";
+			}
+			return "WrongPass";
+		}
+		return "";
+    }
 }

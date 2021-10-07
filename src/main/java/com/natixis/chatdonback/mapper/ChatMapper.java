@@ -12,8 +12,6 @@ import com.natixis.chatdonback.entity.PhotoChat;
 
 public class ChatMapper {
     
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(expression="java(lstPhotoChatDtoToEntity(chatDto.getLstPhotos(), chat))", target = "lstPhotos")
     public static Chat updateChatDtoToEntity(UpdateChatDto chatDto) {
         Chat leChat = new Chat();
         leChat.setCaractere(chatDto.getCaractere());
@@ -28,6 +26,7 @@ public class ChatMapper {
         leChat.setSociableEnfant(chatDto.isSociableEnfant());
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
+        leChat.setDonateur(chatDto.getDonateur());
         return leChat;
     }
 
@@ -44,6 +43,7 @@ public class ChatMapper {
         leChat.setSociableEnfant(chatDto.isSociableEnfant());
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
+        leChat.setDonateur(chatDto.getDonateur());
         return leChat;
     }
 
@@ -61,6 +61,7 @@ public class ChatMapper {
         chatDto.setSociableEnfant(chat.isSociableEnfant());
         chatDto.setTaille(chat.getTaille());
         chatDto.setZoneGeo(chat.getZoneGeo());
+        chatDto.setDonateur(chat.getDonateur());
         return chatDto;
     };
  

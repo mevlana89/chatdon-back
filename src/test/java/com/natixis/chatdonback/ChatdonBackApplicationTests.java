@@ -26,14 +26,8 @@ class ChatdonBackApplicationTests {
     	Donateur donateur = new Donateur();
     	donateur.setNom("donateur_nom");
     	donateur.setPrenom("donateur.prenom");
-<<<<<<< Updated upstream
-    	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
 
-||||||| constructed merge base
-    	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
-=======
-    //	CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
->>>>>>> Stashed changes
+        //CreateDonateurDto createDonateurDto = donateurMapper.donateurEntityToDto(donateur);
     	//Assert.assertEquals(donateur.getNom(), createDonateurDto.getNom());
     	//Assert.assertEquals(donateur.getPrenom(), createDonateurDto.getPrenom());
 

@@ -45,4 +45,19 @@ public class CandidatService {
 
         candidatRepository.save(candidat);
     }
+
+    public String chkCandidatByMail(String mail, String pass) {
+        Candidat candidat = candidatRepository.getCandidatByMail(mail);
+        if (candidat != null) {
+            if (candidat.getMotDePasse().equals(pass)) {
+                return "Candidat";
+            }
+            return "WrongPass";
+        }
+        return "";
+    }
+
+    public Candidat getCandidatByMail(String mail) {
+        return candidatRepository.getCandidatByMail(mail);
+    }
 }

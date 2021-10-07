@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.dto;
 
+import com.natixis.chatdonback.entity.Donateur;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,4 +38,6 @@ public class UpdateChatDto {
     private boolean sociableChien;
 
     private List<CreatePhotoChatDto> lstPhotos;
+
+    private Donateur donateur;
 }
