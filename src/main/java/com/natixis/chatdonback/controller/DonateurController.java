@@ -61,13 +61,13 @@ public class DonateurController {
 		AdresseDTO adresseDto = new AdresseDTO();
 		donnateurDtoTest.setNom("Dupond");
 		donnateurDtoTest.setPrenom("Jean");
-		donnateurDtoTest.setMail("mailD");
-		donnateurDtoTest.setMotDePasse(passwordEncoder.encode("mdp"));
+		donnateurDtoTest.setMail("dupond.jean@orange.fr");
+		donnateurDtoTest.setMotDePasse1(passwordEncoder.encode("mdp"));
 		donnateurDtoTest.setTelephone("00-00-00-00");
 		adresseDto.setRue("10 rue de paris");
 		adresseDto.setCodePostal(75000);
 		adresseDto.setVille("paris");
-		donnateurDtoTest.setAdresseDto(adresseDto);
+		donnateurDtoTest.setAdresseDTO(adresseDto);
 		donateurService.createDonateur(donnateurDtoTest);
 	}
 
