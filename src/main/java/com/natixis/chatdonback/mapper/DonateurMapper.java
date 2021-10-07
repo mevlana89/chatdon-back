@@ -57,7 +57,7 @@ public class DonateurMapper {
         createDonateurDto.setPrenom( donateur.getPrenom() );
         createDonateurDto.setMail( donateur.getMail() );
         createDonateurDto.setTelephone( donateur.getTelephone() );
-        createDonateurDto.setMotDePasse( donateur.getMotDePasse() ); 
+        createDonateurDto.setMotDePasse1( donateur.getMotDePasse() );
 
         System.out.println("mapper adresse");
         Adresse ad = donateur.getAdresse();
@@ -65,7 +65,7 @@ public class DonateurMapper {
         adDto.setRue( ad.getRue() );
         adDto.setVille( ad.getVille() );
         adDto.setCodePostal( ad.getCodePostal() ) ;
-        createDonateurDto.setAdresseDto( adDto );
+        createDonateurDto.setAdresseDTO( adDto );
         
         System.out.println("mapper chatsproposes");
         List<Chat> list = donateur.getChatsProposes();
