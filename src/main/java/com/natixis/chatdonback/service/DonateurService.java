@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.service;
 
+import com.natixis.chatdonback.entity.Chat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,8 @@ import com.natixis.chatdonback.dto.CreateDonateurDto;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.repository.DonateurRepository;
+
+import java.util.List;
 
 @Service
 public class DonateurService {
@@ -46,5 +49,10 @@ public class DonateurService {
 			return "WrongPass";
 		}
 		return "";
+    }
+
+    public List<Chat> findAllCatsByDonatorId(Long id)
+	{
+		return donateurRepository.findById(id).get().getChatsProposes();
     }
 }

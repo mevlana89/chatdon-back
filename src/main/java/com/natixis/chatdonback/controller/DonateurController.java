@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.controller;
 
 // import org.mapstruct.factory.Mappers;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,8 @@ import com.natixis.chatdonback.entity.Adresse;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.service.DonateurService;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -87,4 +90,8 @@ public class DonateurController {
 		donateurService.deleteDonateurById(id);
 	}
 
+	@GetMapping("/donateurs/{id}/chats")
+	public List<Chat> getllCatsByDonatorId(@PathVariable Long id) {
+		return donateurService.findAllCatsByDonatorId(id);
+	}
 }
