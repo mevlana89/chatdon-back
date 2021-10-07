@@ -60,7 +60,6 @@ public class Chat {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
     @JoinColumn(name = "donateur_id", nullable = false)
-    @JsonBackReference
     private Donateur donateur;
     
     void test() {
