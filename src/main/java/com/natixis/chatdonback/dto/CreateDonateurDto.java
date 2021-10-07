@@ -12,12 +12,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class CreateDonateurDto {
-    private String nom;
-    private String prenom;
-    private String mail;
-    private AdresseDTO adresseDto;
-    private String telephone;
-    private String motDePasse;
-    private List<Chat> chatsProposes;
+public class CreateDonateurDto extends UtilisateurDTO{
+
+	private List<Chat> chatsProposes;
+	
 }

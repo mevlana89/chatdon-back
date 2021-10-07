@@ -26,12 +26,12 @@ public class DonateurMapper {
         donateur.setPrenom( createDonateurDto.getPrenom() );
         donateur.setMail( createDonateurDto.getMail() );
         donateur.setTelephone( createDonateurDto.getTelephone() );
-        donateur.setMotDePasse( createDonateurDto.getMotDePasse() ); 
+        donateur.setMotDePasse( createDonateurDto.getMotDePasse1() ); 
         
-        AdresseDTO adDto = createDonateurDto.getAdresseDto();
+        AdresseDTO adDto = createDonateurDto.getAdresseDTO();
         Adresse ad = new Adresse();
-//        System.out.println("affichage adresse");
-//        System.out.println("Rue : "+ adDto.getRue());
+        System.out.println("affichage adresse");
+//     System.out.println("Rue : "+ adDto.getRue());
 //        ad.setRue( adDto.getRue() );
 //        ad.setVille( adDto.getVille() );
 //        ad.setCodePostal( adDto.getCodePostal() ) ;
