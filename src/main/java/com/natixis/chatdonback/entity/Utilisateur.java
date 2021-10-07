@@ -1,5 +1,7 @@
 package com.natixis.chatdonback.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -21,6 +23,7 @@ public abstract class Utilisateur {
 
     private String telephone;
 
+    @JsonIgnore
     private String motDePasse;
 
     //TODO ROLE

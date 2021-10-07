@@ -61,7 +61,7 @@ public class DonateurController {
 		AdresseDTO adresseDto = new AdresseDTO();
 		donnateurDtoTest.setNom("Dupond");
 		donnateurDtoTest.setPrenom("Jean");
-		donnateurDtoTest.setMail("dupond.jean@orange.fr");
+		donnateurDtoTest.setMail("mailD");
 		donnateurDtoTest.setMotDePasse(passwordEncoder.encode("mdp"));
 		donnateurDtoTest.setTelephone("00-00-00-00");
 		adresseDto.setRue("10 rue de paris");
@@ -75,7 +75,7 @@ public class DonateurController {
 	public Donateur getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
 		System.out.println("getDonateur pour " + mail);
 		Donateur donateur = donateurService.getDonateurByMail(mail);
-		if (donateur.getMotDePasse().equals(passwordEncoder.encode(pass))) {
+		if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
 			return donateurService.getDonateurByMail(mail);
 		}
 		throw new Exception("WrongPass");

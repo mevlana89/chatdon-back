@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.natixis.chatdonback.dto.CreateDonateurDto;
@@ -16,7 +17,10 @@ public class DonateurService {
 	
 	@Autowired
 	private DonateurMapper donateurMapper;
-	
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	public Donateur createDonateur(CreateDonateurDto  createDonateurDto) {
 		return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
 	}
@@ -33,10 +37,10 @@ public class DonateurService {
 		return donateurRepository.getDonateurByMail(nom);
 	}
 
-	public String chkDonateurByMail(String nom, String pass) {
-		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+	public String chkDonateurByMail(String mail, String pass) {
+		Donateur donateur = donateurRepository.getDonateurByMail(mail);
 		if (donateur != null) {
-			if (donateur.getMotDePasse().equals(pass)) {
+			if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
 				return "Donateur";
 			}
 			return "WrongPass";

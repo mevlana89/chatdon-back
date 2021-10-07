@@ -21,10 +21,12 @@ public class UtilisateurController {
     @GetMapping("/getProfilutilisateur")
     public String getProfilutilisateur(@RequestParam String mail, @RequestParam String pass) {
         String reponse = donateurService.chkDonateurByMail(mail, pass);
+        System.out.println("getProfilutilisateur : reponse donateur service "+ reponse);
         if (!reponse.equals("")) {
             return reponse;
         }
         reponse = candidatService.chkCandidatByMail(mail, pass);
+        System.out.println("getProfilutilisateur : reponse candidat service "+ reponse);
         if (!reponse.equals("")) {
             return reponse;
         }

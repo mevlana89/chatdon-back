@@ -5,6 +5,7 @@ import com.natixis.chatdonback.entity.Adresse;
 import com.natixis.chatdonback.entity.Candidat;
 import com.natixis.chatdonback.repository.CandidatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,9 @@ public class CandidatService {
 
     @Autowired
     private CandidatRepository candidatRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void createCandidat(CreateCandidatDto createCandidatDto)
     {
@@ -42,6 +46,8 @@ public class CandidatService {
         candidat.setNom("ERGUN");
         candidat.setPrenom("Mustafa");
         candidat.setAdresse(adresse);
+        candidat.setMail("mailC");
+        candidat.setMotDePasse(passwordEncoder.encode("mdp"));
 
         candidatRepository.save(candidat);
     }
@@ -49,7 +55,7 @@ public class CandidatService {
     public String chkCandidatByMail(String mail, String pass) {
         Candidat candidat = candidatRepository.getCandidatByMail(mail);
         if (candidat != null) {
-            if (candidat.getMotDePasse().equals(pass)) {
+            if (passwordEncoder.matches(pass, candidat.getMotDePasse())) {
                 return "Candidat";
             }
             return "WrongPass";
