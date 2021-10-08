@@ -35,17 +35,17 @@ public class DonateurController {
 
 	@PostMapping("/donateurs")
 	public void createDonateur(@RequestBody CreateDonateurDto donateurDto) {
-		System.out.println("ctrl : save donateur");
+		System.out.println("ctrl : save donateur" + donateurDto.getAdresseDTO() );
 		donateurService.createDonateur(donateurDto);
 	}
 
 	@GetMapping("/donateurs/{id}")
-	public Donateur getDonateurById(@PathVariable Long id){
+	public CreateDonateurDto getDonateurById(@PathVariable Long id){
         System.out.println("getDonateurById : " + id);
         try
         {
-
-            return donateurService.getDonateurById(id);
+        	System.out.println("donateur (get donateur):" + donateurService.getDonateurById(id));
+          return donateurService.getDonateurById(id);
         } catch (Exception ex) {
             System.out.println("Exception getDonateurById : " + ex.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "donateur non trouvé pour id "+id);
