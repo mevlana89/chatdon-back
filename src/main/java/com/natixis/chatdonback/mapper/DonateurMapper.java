@@ -35,48 +35,18 @@ public class DonateurMapper {
         donateur.setMotDePasse( passwordEncoder.encode( createDonateurDto.getMotDePasse1() ) ); 
         
         AdresseDTO adDto = createDonateurDto.getAdresseDTO();
-        Adresse ad = new Adresse();
-        ad.setRue( adDto.getRue() );
-        ad.setVille( adDto.getVille() );
-        ad.setCodePostal( adDto.getCodePostal() ) ;
-        donateur.setAdresse( ad );
-        
+        if (adDto != null) {
+            Adresse ad = new Adresse();
+            ad.setRue( adDto.getRue() );
+            ad.setVille( adDto.getVille() );
+            ad.setCodePostal( adDto.getCodePostal() ) ;
+            donateur.setAdresse( ad );
+        }
         List<Chat> list = createDonateurDto.getChatsProposes();
         if ( list != null ) {
             donateur.setChatsProposes( new ArrayList<Chat>( list ) );
         }
         return donateur;
-    }
-    
-    public CreateDonateurDto donateurEntityToCreateDto(Donateur donateur) {
-        if ( donateur == null ) {
-            return null;
-        }
-
-        CreateDonateurDto createDonateurDto = new CreateDonateurDto();
-        
-        System.out.println("mapper entity to createdto");
-
-        createDonateurDto.setNom( donateur.getNom() );
-        createDonateurDto.setPrenom( donateur.getPrenom() );
-        createDonateurDto.setMail( donateur.getMail() );
-        createDonateurDto.setTelephone( donateur.getTelephone() );
-        createDonateurDto.setMotDePasse1( donateur.getMotDePasse() ); 
-
-        System.out.println("mapper adresse");
-        Adresse ad = donateur.getAdresse();
-        AdresseDTO adDto = new AdresseDTO();
-        adDto.setRue( ad.getRue() );
-        adDto.setVille( ad.getVille() );
-        adDto.setCodePostal( ad.getCodePostal() ) ;
-        createDonateurDto.setAdresseDTO( adDto );
-        
-        System.out.println("mapper chatsproposes");
-        List<Chat> list = donateur.getChatsProposes();
-        if ( list != null ) {
-        	createDonateurDto.setChatsProposes( new ArrayList<Chat>( list ) );
-        }
-        return createDonateurDto;
     }
 
     public Donateur getDonateurDtoToEntity(GetDonateurDto getDonateurDto) {
@@ -91,14 +61,17 @@ public class DonateurMapper {
         donateur.setPrenom( getDonateurDto.getPrenom() );
         donateur.setMail( getDonateurDto.getMail() );
         donateur.setTelephone( getDonateurDto.getTelephone() );
-        donateur.setMotDePasse( passwordEncoder.encode( getDonateurDto.getMotDePasse1() ) );
-
+        if (getDonateurDto.getMotDePasse1() != null) {
+            donateur.setMotDePasse(passwordEncoder.encode(getDonateurDto.getMotDePasse1()));
+        }
         AdresseDTO adDto = getDonateurDto.getAdresseDTO();
-        Adresse ad = new Adresse();
-        ad.setRue( adDto.getRue() );
-        ad.setVille( adDto.getVille() );
-        ad.setCodePostal( adDto.getCodePostal() ) ;
-        donateur.setAdresse( ad );
+        if (adDto != null) {
+            Adresse ad = new Adresse();
+            ad.setRue( adDto.getRue() );
+            ad.setVille( adDto.getVille() );
+            ad.setCodePostal( adDto.getCodePostal() ) ;
+            donateur.setAdresse( ad );
+        }
 
         List<Chat> list = getDonateurDto.getChatsProposes();
         if ( list != null ) {
@@ -120,16 +93,18 @@ public class DonateurMapper {
         getDonateurDto.setPrenom( donateur.getPrenom() );
         getDonateurDto.setMail( donateur.getMail() );
         getDonateurDto.setTelephone( donateur.getTelephone() );
-        getDonateurDto.setMotDePasse1( donateur.getMotDePasse() );
+        // pas d'envoi du mot de passe vers le front
+        // getDonateurDto.setMotDePasse1( "" );
 
         System.out.println("mapper adresse");
         Adresse ad = donateur.getAdresse();
-        AdresseDTO adDto = new AdresseDTO();
-        adDto.setRue( ad.getRue() );
-        adDto.setVille( ad.getVille() );
-        adDto.setCodePostal( ad.getCodePostal() ) ;
-        getDonateurDto.setAdresseDTO( adDto );
-
+        if (ad != null) {
+            AdresseDTO adDto = new AdresseDTO();
+            adDto.setRue(ad.getRue());
+            adDto.setVille(ad.getVille());
+            adDto.setCodePostal(ad.getCodePostal());
+            getDonateurDto.setAdresseDTO(adDto);
+        }
         System.out.println("mapper chatsproposes");
         List<Chat> list = donateur.getChatsProposes();
         if ( list != null ) {
