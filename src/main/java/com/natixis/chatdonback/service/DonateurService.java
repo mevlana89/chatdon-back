@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.service;
 
+import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,16 +26,16 @@ public class DonateurService {
 	private PasswordEncoder passwordEncoder;
 
 	public Donateur createDonateur(CreateDonateurDto  createDonateurDto) {
-		return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
+		return donateurRepository.save( donateurMapper.createDonateurDtoToEntity(createDonateurDto) );
 	}
 	
 	public void deleteDonateurById(Long id) {
 		donateurRepository.deleteById(id);
 	}
 	
-	public CreateDonateurDto getDonateurById(Long id) {
-		System.out.println("adressedto : " + donateurMapper.donateurEntityToDto(donateurRepository.findById(id).get()).getAdresseDTO());
-		return donateurMapper.donateurEntityToDto(donateurRepository.findById(id).get());		
+	public GetDonateurDto getDonateurById(Long id) {
+		System.out.println("adressedto : " + donateurMapper.donateurEntityToGetDto(donateurRepository.findById(id).get()).getAdresseDTO());
+		return donateurMapper.donateurEntityToGetDto(donateurRepository.findById(id).get());
 	}
 
 	public Donateur getDonateurByMail(String nom) {
