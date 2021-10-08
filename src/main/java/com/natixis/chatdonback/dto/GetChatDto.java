@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,7 +15,9 @@ import lombok.Setter;
 public class GetChatDto {
     
     private int id;
-    
+
+    private String nom;
+
     private String categorieAge;
     
     private String race;
@@ -38,5 +42,6 @@ public class GetChatDto {
 
     private Donateur donateur;
 
+    private List<GetPhotoChatDto> lstGetPhotoChatDto;
 
 }

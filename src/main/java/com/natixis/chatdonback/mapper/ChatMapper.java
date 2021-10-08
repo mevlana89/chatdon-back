@@ -14,8 +14,9 @@ public class ChatMapper {
     
     public static Chat updateChatDtoToEntity(UpdateChatDto chatDto) {
         Chat leChat = new Chat();
+        leChat.setNom(chatDto.getNom());
         leChat.setCaractere(chatDto.getCaractere());
-        leChat.setCategorieAge(chatDto.getCaractere());
+        leChat.setCategorieAge(chatDto.getCategorieAge());
         leChat.setDescriptif(chatDto.getDescriptif());
         leChat.setSociableChat(chatDto.isSociableChat());
         leChat.setId(chatDto.getId());
@@ -27,13 +28,15 @@ public class ChatMapper {
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
         leChat.setDonateur(chatDto.getDonateur());
+        leChat.setLstPhotos(PhotoChatMapper.lstPhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
         return leChat;
     }
 
     public static Chat createChatDtoToEntity(CreateChatDto chatDto) {
         Chat leChat = new Chat();
+        leChat.setNom(chatDto.getNom());
         leChat.setCaractere(chatDto.getCaractere());
-        leChat.setCategorieAge(chatDto.getCaractere());
+        leChat.setCategorieAge(chatDto.getCategorieAge());
         leChat.setDescriptif(chatDto.getDescriptif());
         leChat.setSociableChat(chatDto.isSociableChat());
         leChat.setPelage(chatDto.getPelage());
@@ -44,13 +47,15 @@ public class ChatMapper {
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
         leChat.setDonateur(chatDto.getDonateur());
+        leChat.setLstPhotos(PhotoChatMapper.lstPhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
         return leChat;
     }
 
     public static GetChatDto chatEntityToDto(Chat chat) {
         GetChatDto chatDto = new GetChatDto();
+        chatDto.setNom(chat.getNom());
         chatDto.setCaractere(chat.getCaractere());
-        chatDto.setCategorieAge(chat.getCaractere());
+        chatDto.setCategorieAge(chat.getCategorieAge());
         chatDto.setDescriptif(chat.getDescriptif());
         chatDto.setSociableChat(chat.isSociableChat());
         chatDto.setId(chat.getId());
@@ -62,28 +67,10 @@ public class ChatMapper {
         chatDto.setTaille(chat.getTaille());
         chatDto.setZoneGeo(chat.getZoneGeo());
         chatDto.setDonateur(chat.getDonateur());
+        chatDto.setLstGetPhotoChatDto(PhotoChatMapper.);
         return chatDto;
     };
  
-    public static ArrayList<PhotoChat> lstPhotoChatDtoToEntity(List<CreatePhotoChatDto> lstPhotoChatDto, Chat chat)
-    {
-        ArrayList<PhotoChat> lstPhotosChat = new ArrayList<PhotoChat>();
-        for (CreatePhotoChatDto cphotoDto : lstPhotoChatDto) {
-            lstPhotosChat.add(createPhotoChatDtoToPhotoChat(cphotoDto, chat));
-        }
-        return lstPhotosChat;
-    }
-     
- //   @Mapping(source="chat", target="chat")
- //   @Mapping(target = "id", ignore = true)
-    public static PhotoChat createPhotoChatDtoToPhotoChat(CreatePhotoChatDto createPhotoChatDto, Chat chat) {
-        if ( createPhotoChatDto == null && chat == null ) {
-            return null;
-        }
-        PhotoChat photoChat = new PhotoChat();
-        photoChat.setChat(chat);
-        photoChat.setCheminPhoto(createPhotoChatDto.getCheminPhoto());
-        return photoChat;
-    }
+
      
 }
