@@ -67,7 +67,7 @@ public class ChatMapper {
         chatDto.setTaille(chat.getTaille());
         chatDto.setZoneGeo(chat.getZoneGeo());
         chatDto.setDonateur(chat.getDonateur());
-        chatDto.setLstGetPhotoChatDto(PhotoChatMapper.);
+        chatDto.setLstGetPhotoChatDto(PhotoChatMapper.lstEntityToGetPhotoChatDto(chat.getLstPhotos(), chatDto));
         return chatDto;
     };
  
