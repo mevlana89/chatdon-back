@@ -3,6 +3,9 @@ package com.natixis.chatdonback.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.natixis.chatdonback.dto.GetDonateurDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
@@ -14,64 +17,101 @@ import com.natixis.chatdonback.entity.Donateur;
 @Component
 public class DonateurMapper {
 	
-    public Donateur donateurDtoToEntity(CreateDonateurDto createDonateurDto) {
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+    public Donateur createDonateurDtoToEntity(CreateDonateurDto createDonateurDto) {
         if ( createDonateurDto == null ) {
             return null;
         }
 
         Donateur donateur = new Donateur();
-        System.out.println("mapper dto to entity");
+        System.out.println("mapper createdto to entity");
 
         donateur.setNom( createDonateurDto.getNom() );
         donateur.setPrenom( createDonateurDto.getPrenom() );
         donateur.setMail( createDonateurDto.getMail() );
         donateur.setTelephone( createDonateurDto.getTelephone() );
-        donateur.setMotDePasse( createDonateurDto.getMotDePasse1() ); 
+        donateur.setMotDePasse( passwordEncoder.encode( createDonateurDto.getMotDePasse1() ) ); 
         
         AdresseDTO adDto = createDonateurDto.getAdresseDTO();
-        Adresse ad = new Adresse();
-        System.out.println("affichage adresse");
-//     System.out.println("Rue : "+ adDto.getRue());
-//        ad.setRue( adDto.getRue() );
-//        ad.setVille( adDto.getVille() );
-//        ad.setCodePostal( adDto.getCodePostal() ) ;
-//        donateur.setAdresse( ad );
-        
+        if (adDto != null) {
+            Adresse ad = new Adresse();
+            ad.setRue( adDto.getRue() );
+            ad.setVille( adDto.getVille() );
+            ad.setCodePostal( adDto.getCodePostal() ) ;
+            donateur.setAdresse( ad );
+        }
         List<Chat> list = createDonateurDto.getChatsProposes();
         if ( list != null ) {
             donateur.setChatsProposes( new ArrayList<Chat>( list ) );
         }
         return donateur;
     }
-    
-    public CreateDonateurDto donateurEntityToDto(Donateur donateur) {
+
+    public Donateur getDonateurDtoToEntity(GetDonateurDto getDonateurDto) {
+        if ( getDonateurDto == null ) {
+            return null;
+        }
+
+        Donateur donateur = new Donateur();
+        System.out.println("mapper getDto to entity");
+        donateur.setId(getDonateurDto.getId());
+        donateur.setNom( getDonateurDto.getNom() );
+        donateur.setPrenom( getDonateurDto.getPrenom() );
+        donateur.setMail( getDonateurDto.getMail() );
+        donateur.setTelephone( getDonateurDto.getTelephone() );
+        if (getDonateurDto.getMotDePasse1() != null) {
+            donateur.setMotDePasse(passwordEncoder.encode(getDonateurDto.getMotDePasse1()));
+        }
+        AdresseDTO adDto = getDonateurDto.getAdresseDTO();
+        if (adDto != null) {
+            Adresse ad = new Adresse();
+            ad.setRue( adDto.getRue() );
+            ad.setVille( adDto.getVille() );
+            ad.setCodePostal( adDto.getCodePostal() ) ;
+            donateur.setAdresse( ad );
+        }
+
+        List<Chat> list = getDonateurDto.getChatsProposes();
+        if ( list != null ) {
+            donateur.setChatsProposes( new ArrayList<Chat>( list ) );
+        }
+        return donateur;
+    }
+
+    public GetDonateurDto donateurEntityToGetDto(Donateur donateur) {
         if ( donateur == null ) {
             return null;
         }
 
-        CreateDonateurDto createDonateurDto = new CreateDonateurDto();
-        
-        System.out.println("mapper entity to dto");
+        GetDonateurDto getDonateurDto = new GetDonateurDto();
 
-        createDonateurDto.setNom( donateur.getNom() );
-        createDonateurDto.setPrenom( donateur.getPrenom() );
-        createDonateurDto.setMail( donateur.getMail() );
-        createDonateurDto.setTelephone( donateur.getTelephone() );
-        createDonateurDto.setMotDePasse1( donateur.getMotDePasse() );
+        System.out.println("mapper entity to getDto");
+        getDonateurDto.setId(donateur.getId());
+        getDonateurDto.setNom( donateur.getNom() );
+        getDonateurDto.setPrenom( donateur.getPrenom() );
+        getDonateurDto.setMail( donateur.getMail() );
+        getDonateurDto.setTelephone( donateur.getTelephone() );
+        // pas d'envoi du mot de passe vers le front
+        // getDonateurDto.setMotDePasse1( "" );
 
         System.out.println("mapper adresse");
         Adresse ad = donateur.getAdresse();
-        AdresseDTO adDto = new AdresseDTO();
-        adDto.setRue( ad.getRue() );
-        adDto.setVille( ad.getVille() );
-        adDto.setCodePostal( ad.getCodePostal() ) ;
-        createDonateurDto.setAdresseDTO( adDto );
-        
+        if (ad != null) {
+            AdresseDTO adDto = new AdresseDTO();
+            adDto.setRue(ad.getRue());
+            adDto.setVille(ad.getVille());
+            adDto.setCodePostal(ad.getCodePostal());
+            getDonateurDto.setAdresseDTO(adDto);
+        }
         System.out.println("mapper chatsproposes");
         List<Chat> list = donateur.getChatsProposes();
         if ( list != null ) {
-        	createDonateurDto.setChatsProposes( new ArrayList<Chat>( list ) );
+            getDonateurDto.setChatsProposes( new ArrayList<Chat>( list ) );
         }
-        return createDonateurDto;
+        return getDonateurDto;
     }
+
+
 }

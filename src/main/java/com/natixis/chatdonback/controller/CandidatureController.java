@@ -5,12 +5,17 @@ import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.service.CandidatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-@Controller
+import java.util.List;
+
+
+@RestController
+@CrossOrigin
 public class CandidatureController {
 
     @Autowired
@@ -18,15 +23,16 @@ public class CandidatureController {
 
 
 
-    @GetMapping("/candidats/{id}/candidatures")
-    public Candidature findAllCandidaturesByCandidat(@PathVariable Integer id){
-        System.out.println("findAllCandidaturesByCandidat : " + id);
+    @GetMapping("/candidats/{candidatId}/candidatures")
+    public List<Candidature> findAllCandidaturesByCandidat(@PathVariable Long candidatId){
+        System.out.println("findAllCandidaturesByCandidat : " + candidatId);
         try {
-            return candidatureService.findAllCandidaturesByCandidat(id);
+            return candidatureService.findAllCandidaturesByCandidatId(candidatId);
         }
         catch (Exception e){
-            System.out.println("Exception pour la selection des candidatures par candidat:" + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le candidat "+id);
+            System.out.println("Exception pour la selection des candidatures par candidat:");
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le candidat "+ candidatId);
         }
 
 
@@ -43,7 +49,5 @@ public class CandidatureController {
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le chat "+id);
 //        }
 //    }
-
-
 
 }

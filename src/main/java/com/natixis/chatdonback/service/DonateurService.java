@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.service;
 
+import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,19 +26,28 @@ public class DonateurService {
 	private PasswordEncoder passwordEncoder;
 
 	public Donateur createDonateur(CreateDonateurDto  createDonateurDto) {
-		return donateurRepository.save( donateurMapper.donateurDtoToEntity(createDonateurDto) );
+		return donateurRepository.save( donateurMapper.createDonateurDtoToEntity(createDonateurDto) );
 	}
-	
+
+	public Donateur updateDonateur(GetDonateurDto getDonateurDto) {
+		return donateurRepository.save(donateurMapper.getDonateurDtoToEntity(getDonateurDto));
+	}
+
 	public void deleteDonateurById(Long id) {
 		donateurRepository.deleteById(id);
 	}
 	
-	public Donateur getDonateurById(Long id) {
-		return donateurRepository.findById(id).get();		
+	public GetDonateurDto getDonateurById(Long id) {
+		System.out.println("adressedto : " + donateurMapper.donateurEntityToGetDto(donateurRepository.findById(id).get()).getAdresseDTO());
+		return donateurMapper.donateurEntityToGetDto(donateurRepository.findById(id).get());
 	}
 
-	public Donateur getDonateurByMail(String nom) {
-		return donateurRepository.getDonateurByMail(nom);
+	public GetDonateurDto getDonateurByMail(String nom, String pass) throws Exception {
+		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+		if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
+			return donateurMapper.donateurEntityToGetDto(donateur);
+		}
+		throw new Exception("WrongPass");
 	}
 
 	public String chkDonateurByMail(String mail, String pass) {
@@ -55,4 +65,5 @@ public class DonateurService {
 	{
 		return donateurRepository.findById(id).get().getChatsProposes();
     }
+
 }
