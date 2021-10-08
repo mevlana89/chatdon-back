@@ -14,18 +14,19 @@ public class CandidatureService {
     private CandidatureRepository candidatureRepository;
 
 
-    public Candidature findAllCandidaturesByCandidat (Integer candidatId) throws Exception{
-        Optional<Candidature> myCandidatures = candidatureRepository.findById(Long.valueOf(candidatId));
-        if (myCandidatures.isPresent()) {
-            return myCandidatures.get();
+    public List<Candidature> findAllCandidaturesByCandidatId (Long candidatId) throws Exception{
+        List<Candidature> myCandidatures = candidatureRepository.findCandidaturesByCandidat_Id(candidatId);
+        if (myCandidatures.size()!=0) {
+            return myCandidatures;
         }
         throw new Exception("No Candidatures to return");
+
     }
 
-    public Candidature findAllCandidaturesByCat (Integer chatId) throws Exception{
-        Optional<Candidature> myCandidatures = candidatureRepository.findById(Long.valueOf(chatId));
-        if (myCandidatures.isPresent()) {
-            return myCandidatures.get();
+    public List<Candidature> findAllCandidaturesByCat (Integer chatId) throws Exception{
+        List<Candidature> myCandidatures = candidatureRepository.findCandidaturesByChat_Id(chatId);
+        if (myCandidatures.size()!=0) {
+            return myCandidatures;
         }
         throw new Exception("No Candidatures to return");
     }
