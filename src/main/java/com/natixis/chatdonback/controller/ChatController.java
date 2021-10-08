@@ -5,6 +5,7 @@ import com.natixis.chatdonback.dto.FilterDto;
 import java.util.List;
 
 import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.entity.Candidature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +53,9 @@ public class ChatController {
         return chatService.updateChat(chatDto);
     }
 
-    
+    @GetMapping("/chats/{id}/candidatures")
+    public List <Candidature> getAllCandidaturesByCatId(@PathVariable int id)
+    {
+        return chatService.findAllCandidaturesByCatId(id);
+    }
 }
