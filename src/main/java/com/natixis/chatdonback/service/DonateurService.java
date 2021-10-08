@@ -29,8 +29,9 @@ public class DonateurService {
 		donateurRepository.deleteById(id);
 	}
 	
-	public Donateur getDonateurById(Long id) {
-		return donateurRepository.findById(id).get();		
+	public CreateDonateurDto getDonateurById(Long id) {
+		System.out.println("adressedto : " + donateurMapper.donateurEntityToDto(donateurRepository.findById(id).get()).getAdresseDTO());
+		return donateurMapper.donateurEntityToDto(donateurRepository.findById(id).get());		
 	}
 
 	public Donateur getDonateurByMail(String nom) {

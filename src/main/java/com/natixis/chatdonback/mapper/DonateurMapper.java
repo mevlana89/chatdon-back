@@ -3,6 +3,8 @@ package com.natixis.chatdonback.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
@@ -13,6 +15,9 @@ import com.natixis.chatdonback.entity.Donateur;
 
 @Component
 public class DonateurMapper {
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
     public Donateur donateurDtoToEntity(CreateDonateurDto createDonateurDto) {
         if ( createDonateurDto == null ) {
@@ -26,16 +31,14 @@ public class DonateurMapper {
         donateur.setPrenom( createDonateurDto.getPrenom() );
         donateur.setMail( createDonateurDto.getMail() );
         donateur.setTelephone( createDonateurDto.getTelephone() );
-        donateur.setMotDePasse( createDonateurDto.getMotDePasse1() ); 
+        donateur.setMotDePasse( passwordEncoder.encode( createDonateurDto.getMotDePasse1() ) ); 
         
         AdresseDTO adDto = createDonateurDto.getAdresseDTO();
         Adresse ad = new Adresse();
-        System.out.println("affichage adresse");
-//     System.out.println("Rue : "+ adDto.getRue());
-//        ad.setRue( adDto.getRue() );
-//        ad.setVille( adDto.getVille() );
-//        ad.setCodePostal( adDto.getCodePostal() ) ;
-//        donateur.setAdresse( ad );
+        ad.setRue( adDto.getRue() );
+        ad.setVille( adDto.getVille() );
+        ad.setCodePostal( adDto.getCodePostal() ) ;
+        donateur.setAdresse( ad );
         
         List<Chat> list = createDonateurDto.getChatsProposes();
         if ( list != null ) {
@@ -57,7 +60,8 @@ public class DonateurMapper {
         createDonateurDto.setPrenom( donateur.getPrenom() );
         createDonateurDto.setMail( donateur.getMail() );
         createDonateurDto.setTelephone( donateur.getTelephone() );
-        createDonateurDto.setMotDePasse1( donateur.getMotDePasse() );
+        createDonateurDto.setMotDePasse1( donateur.getMotDePasse() ); 
+
 
         System.out.println("mapper adresse");
         Adresse ad = donateur.getAdresse();
