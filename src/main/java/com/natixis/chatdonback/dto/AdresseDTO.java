@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AdresseDTO {
     private String rue;
-    private int CodePostal;
+    private int codePostal;
     private String ville;
 }
