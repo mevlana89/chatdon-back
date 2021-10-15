@@ -2,6 +2,8 @@ package com.natixis.chatdonback.controller;
 
 import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
+import com.natixis.chatdonback.entity.Donateur;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import com.natixis.chatdonback.dto.CreateDonateurDto;
 import com.natixis.chatdonback.service.DonateurService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -36,8 +39,9 @@ public class DonateurController {
 	}
 
 	@PostMapping("/donateurs/{id}")
-	public void updateDonateur(@RequestBody GetDonateurDto getDonateurDto) {
-		donateurService.updateDonateur(getDonateurDto);
+	public void updateDonateur(@PathVariable Long id, @RequestBody GetDonateurDto getDonateurDto) {
+		System.out.println("updateDonateur" + id);
+		donateurService.updateDonateur(id, getDonateurDto);
 	}
 
 	@GetMapping("/donateurs/{id}")

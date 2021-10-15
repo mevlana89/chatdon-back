@@ -12,6 +12,7 @@ import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.repository.DonateurRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DonateurService {
@@ -29,8 +30,15 @@ public class DonateurService {
 		return donateurRepository.save( donateurMapper.createDonateurDtoToEntity(createDonateurDto) );
 	}
 
-	public Donateur updateDonateur(GetDonateurDto getDonateurDto) {
-		return donateurRepository.save(donateurMapper.getDonateurDtoToEntity(getDonateurDto));
+	public Donateur updateDonateur(Long id, GetDonateurDto getDonateurDto) {
+		Optional<Donateur> donateurOptional = donateurRepository.findById(id);
+		if (donateurOptional.isPresent()) {
+//			Donateur donateur = new Donateur();
+//			System.out.println("tel reçu " + getDonateurDto.getTelephone() + "tel entity : " + donateurMapper.getDonateurDtoToEntity(getDonateurDto).getTelephone());
+//			donateur = donateurMapper.getDonateurDtoToEntity(getDonateurDto);
+			return donateurRepository.save(donateurMapper.getDonateurDtoToEntity(getDonateurDto));	
+		}
+		return null;	
 	}
 
 	public void deleteDonateurById(Long id) {

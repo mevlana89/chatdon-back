@@ -22,7 +22,7 @@ public class Adresse {
     private Long id;
 
     private String rue;
-    private int CodePostal;
+    private int codePostal;
     private String ville;
 
 }
