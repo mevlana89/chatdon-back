@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.mapper.DonateurMapper;
+import com.natixis.chatdonback.repository.AdresseRepository;
 import com.natixis.chatdonback.repository.DonateurRepository;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public class DonateurService {
 	
 	@Autowired
 	private DonateurRepository donateurRepository;
+	
+	@Autowired
+	private AdresseRepository adresseRepository;
 	
 	@Autowired
 	private DonateurMapper donateurMapper;
@@ -33,10 +37,12 @@ public class DonateurService {
 	public Donateur updateDonateur(Long id, GetDonateurDto getDonateurDto) {
 		Optional<Donateur> donateurOptional = donateurRepository.findById(id);
 		if (donateurOptional.isPresent()) {
-//			Donateur donateur = new Donateur();
-//			System.out.println("tel reçu " + getDonateurDto.getTelephone() + "tel entity : " + donateurMapper.getDonateurDtoToEntity(getDonateurDto).getTelephone());
-//			donateur = donateurMapper.getDonateurDtoToEntity(getDonateurDto);
-			return donateurRepository.save(donateurMapper.getDonateurDtoToEntity(getDonateurDto));	
+			// Mot de passe à space depuis le front à valoriser par celui en table avant sauvegarde
+			getDonateurDto.setMotDePasse1(donateurOptional.get().getMotDePasse());
+			// mapper du dto puis sauvegarde de l'adresse avant sauvegarde du donateur
+			Donateur getDonateurMappe = donateurMapper.getDonateurDtoToEntity(getDonateurDto);
+			adresseRepository.save(getDonateurMappe.getAdresse());
+			return donateurRepository.save(getDonateurMappe);	
 		}
 		return null;	
 	}
