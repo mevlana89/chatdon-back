@@ -1,14 +1,12 @@
 package com.natixis.chatdonback.controller;
 
 
+import com.natixis.chatdonback.dto.CreateCandidatureDto;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.service.CandidatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -48,6 +46,11 @@ public class CandidatureController {
             System.out.println("Exception pour la selection des candidatures par candidat:" + e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le chat "+chatid);
         }
+    }
+
+    @PostMapping()
+    public void createCandidatureDto(@RequestBody CreateCandidatureDto createCandidatureDto){
+        candidatureService.CreateCandidature(createCandidatureDto);
     }
 
 

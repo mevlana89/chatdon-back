@@ -11,5 +11,4 @@ import lombok.Setter;
 public class CreateCandidatureDto {
     private int id;
     private int chatId;
-    private String status;
 }

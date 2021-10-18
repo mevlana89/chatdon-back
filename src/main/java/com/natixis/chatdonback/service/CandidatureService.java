@@ -1,12 +1,13 @@
 package com.natixis.chatdonback.service;
 
+import com.natixis.chatdonback.dto.CreateCandidatureDto;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.repository.CandidatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CandidatureService {
@@ -30,6 +31,15 @@ public class CandidatureService {
         }
         throw new Exception("No Candidatures to return");
     }
+
+    public void CreateCandidature(CreateCandidatureDto createCandidatureDto){
+        Candidature candidature=new Candidature();
+             //TO DO
+             //recuperer le chat et le candidat a partir des id qui sont dans le dto
+             // creer une nouvelle candidature avec status en cours et le chat et candidat dans la candidature a enregistrer
+    }
+
+
 
 
 }
