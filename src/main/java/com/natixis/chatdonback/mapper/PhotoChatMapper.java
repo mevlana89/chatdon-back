@@ -12,14 +12,22 @@ import java.util.List;
 
 public class PhotoChatMapper {
 
-    public static ArrayList<PhotoChat> lstPhotoChatDtoToEntity(List<CreatePhotoChatDto> lstPhotoChatDto, Chat chat)
+    public static ArrayList<PhotoChat> lstCreatePhotoChatDtoToEntity(List<CreatePhotoChatDto> lstPhotoChatDto, Chat chat)
     {
         ArrayList<PhotoChat> lstPhotosChat = new ArrayList<PhotoChat>();
+        System.out.println("lstCreatePhotoChatDtoToEntity ");
+        if (lstPhotoChatDto == null) {
+            System.out.println("lstPhotoChatDtoToEntity null, return list vide");
+            return lstPhotosChat;
+        }
+        System.out.println("lstPhotoChatDtoToEntity lst non null : " + lstPhotoChatDto.size());
         for (CreatePhotoChatDto cphotoDto : lstPhotoChatDto) {
             lstPhotosChat.add(createPhotoChatDtoToPhotoChat(cphotoDto, chat));
         }
+        System.out.println("lstPhotoChatDtoToEntity return lstPhotosChat "+ lstPhotosChat.size());
         return lstPhotosChat;
     }
+
 
     private static PhotoChat createPhotoChatDtoToPhotoChat(CreatePhotoChatDto createPhotoChatDto, Chat chat) {
         if ( createPhotoChatDto == null && chat == null ) {
@@ -34,8 +42,13 @@ public class PhotoChatMapper {
     public static ArrayList<PhotoChat> lstGetPhotoChatDtoToEntity(List<GetPhotoChatDto> lstPhotoChatDto, Chat chat)
     {
         ArrayList<PhotoChat> lstPhotosChat = new ArrayList<PhotoChat>();
-        for (GetPhotoChatDto cphotoDto : lstPhotoChatDto) {
-            lstPhotosChat.add(getPhotoChatDtoToPhotoChat(cphotoDto, chat));
+        System.out.println("lstGetPhotoChatDtoToEntity ");
+        if (lstPhotoChatDto == null) {
+            System.out.println("lstGetPhotoChatDtoToEntity null, return list vide");
+            return lstPhotosChat;
+        }
+        for (GetPhotoChatDto getPhotoChatDto : lstPhotoChatDto) {
+            lstPhotosChat.add(getPhotoChatDtoToPhotoChat(getPhotoChatDto, chat));
         }
         return lstPhotosChat;
     }
@@ -60,6 +73,6 @@ public class PhotoChatMapper {
     }
 
     private static GetPhotoChatDto getEntityToGetPhotoChatDto(PhotoChat photo, GetChatDto chatDto) {
-        return new GetPhotoChatDto(photo.getId(), chatDto, photo.getCheminPhoto());
+        return new GetPhotoChatDto(photo.getId(), photo.getCheminPhoto(), chatDto);
     }
 }

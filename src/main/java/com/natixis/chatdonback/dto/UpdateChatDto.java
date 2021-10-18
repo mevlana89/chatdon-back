@@ -37,7 +37,7 @@ public class UpdateChatDto {
     
     private boolean sociableChien;
 
-    private List<CreatePhotoChatDto> lstPhotos;
+    private List<GetPhotoChatDto> lstPhotos;
 
     private Donateur donateur;
 }

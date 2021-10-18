@@ -1,6 +1,5 @@
 package com.natixis.chatdonback.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,13 +9,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetPhotoChatDto {
+public class GetChatDonateurDto {
 
-    private int id;
+    private Long id;
 
-    private String cheminPhoto;
+    private String nom;
 
-    @JsonBackReference
-    private GetChatDto chat;
+    private String prenom;
+
+    private String mail;
 
 }

@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.controller;
 
 // import org.mapstruct.factory.Mappers;
+import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,26 +61,26 @@ public class DonateurController {
 	
 	@GetMapping("/TestCreationDonateur")
 	public void testCreateDonateur() {
-		CreateDonateurDto donnateurDtoTest = new CreateDonateurDto();
+		CreateDonateurDto donateurDtoTest = new CreateDonateurDto();
 		AdresseDTO adresseDto = new AdresseDTO();
-		donnateurDtoTest.setNom("Dupond");
-		donnateurDtoTest.setPrenom("Jean");
-		donnateurDtoTest.setMail("dupond.jean@orange.fr");
-		donnateurDtoTest.setMotDePasse1(passwordEncoder.encode("mdp"));
-		donnateurDtoTest.setTelephone("00-00-00-00");
+		donateurDtoTest.setNom("Dupond");
+		donateurDtoTest.setPrenom("Jean");
+		donateurDtoTest.setMail("mailD");
+		donateurDtoTest.setMotDePasse1(passwordEncoder.encode("mdp"));
+		donateurDtoTest.setTelephone("00-00-00-00");
 		adresseDto.setRue("10 rue de paris");
 		adresseDto.setCodePostal(75000);
 		adresseDto.setVille("paris");
-		donnateurDtoTest.setAdresseDTO(adresseDto);
-		donateurService.createDonateur(donnateurDtoTest);
+		donateurDtoTest.setAdresseDTO(adresseDto);
+		donateurService.createDonateur(donateurDtoTest);
 	}
 
 	@GetMapping("/getDonateurbyMail")
-	public Donateur getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
+	public GetDonateurDto getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
 		System.out.println("getDonateur pour " + mail);
-		Donateur donateur = donateurService.getDonateurByMail(mail);
-		if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
-			return donateurService.getDonateurByMail(mail);
+		GetDonateurDto donateur = donateurService.getDonateurDtoByMail(mail);
+		if (passwordEncoder.matches(pass, donateur.getMotDePasse1())) {
+			return donateurService.getDonateurDtoByMail(mail);
 		}
 		throw new Exception("WrongPass");
 	}

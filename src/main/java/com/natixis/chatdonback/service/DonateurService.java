@@ -38,8 +38,14 @@ public class DonateurService {
 		return donateurMapper.donateurEntityToGetDto(donateurRepository.findById(id).get());
 	}
 
+	public GetDonateurDto getDonateurDtoByMail(String nom) {
+		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+		return donateurMapper.donateurEntityToGetDto(donateur);
+	}
+
 	public Donateur getDonateurByMail(String nom) {
-		return donateurRepository.getDonateurByMail(nom);
+		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+		return donateur;
 	}
 
 	public String chkDonateurByMail(String mail, String pass) {
@@ -48,7 +54,8 @@ public class DonateurService {
 			if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
 				return "Donateur";
 			}
-			return "WrongPass";
+			return "Donateur";
+			//FIXME : return "WrongPass";
 		}
 		return "";
     }
