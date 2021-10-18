@@ -38,18 +38,16 @@ public class CandidatureController {
 
     }
 
-    @GetMapping("/chats/{id}/candidatures")
-    public List<Candidature> findAllCandidaturesByCat(@PathVariable Integer chatid){
-        System.out.println("findAllCandidaturesByCat : " + chatid);
-        try{
-            return candidatureService.findAllCandidaturesByCat(chatid);
-        }
-        catch (Exception e){
-            System.out.println("Exception pour la selection des candidatures par candidat:" + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le chat "+chatid);
-        }
-    }
-
-
+//    @GetMapping("/chats/{id}/candidatures")
+//    public Candidature indAllCandidaturesByCat(@PathVariable Integer id){
+//        System.out.println("findAllCandidaturesByCandidat : " + id);
+//        try{
+//            return candidatureService.findAllCandidaturesByCat(id);
+//        }
+//        catch (Exception e){
+//            System.out.println("Exception pour la selection des candidatures par candidat:" + e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le chat "+id);
+//        }
+//    }
 
 }

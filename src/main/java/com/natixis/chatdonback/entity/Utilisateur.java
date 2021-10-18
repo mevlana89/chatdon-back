@@ -18,7 +18,7 @@ public abstract class Utilisateur {
 
     private String mail;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Adresse adresse;
 
     private String telephone;
