@@ -1,12 +1,17 @@
 package com.natixis.chatdonback.service;
 
-import com.natixis.chatdonback.dto.CreateCandidatDto;
-import com.natixis.chatdonback.entity.Adresse;
-import com.natixis.chatdonback.entity.Candidat;
-import com.natixis.chatdonback.repository.CandidatRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.natixis.chatdonback.dto.CreateCandidatDto;
+import com.natixis.chatdonback.dto.GetCandidatDto;
+import com.natixis.chatdonback.entity.Candidat;
+import com.natixis.chatdonback.mapper.CandidatMapper;
+import com.natixis.chatdonback.repository.AdresseRepository;
+import com.natixis.chatdonback.repository.CandidatRepository;
 
 @Service
 public class CandidatService {
@@ -16,42 +21,40 @@ public class CandidatService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private CandidatMapper candidatMapper;
+    
+	@Autowired
+	private AdresseRepository adresseRepository;
 
     public void createCandidat(CreateCandidatDto createCandidatDto)
     {
-        Candidat candidat = new Candidat();
-        Adresse adresse = new Adresse();
-
-        //MAPPER A FAIRE
-//        adresse.setCodePostal(createCandidatDto.getAdresse().getCodePostal());
-//        adresse.setRue(createCandidatDto.getAdresse().getRue());
-//        adresse.setVille(createCandidatDto.getAdresse().getVille());
-//
-//        candidat.setPresenceJardin(createCandidatDto.isPresenceJardin());
-//        candidat.setSociableChat(createCandidatDto.isSociableChat());
-//        candidat.setSociableChien(createCandidatDto.isSociableChien());
-//        candidat.setTypeHebergement(createCandidatDto.getTypeHebergement());
-//        candidat.setNom(createCandidatDto.getNom());
-//        candidat.setPrenom(createCandidatDto.getPrenom());
-//        candidat.setAdresse(createCandidatDto.getAdresse());
-
-        adresse.setCodePostal(75000);
-        adresse.setRue("15 rue de la paix");
-        adresse.setVille("Paris");
-        adresse.setRue("");
-        candidat.setPresenceJardin(false);
-        candidat.setSociableChat(true);
-        candidat.setSociableChien(false);
-        candidat.setTypeHebergement("test");
-        candidat.setNom("ERGUN");
-        candidat.setPrenom("Mustafa");
-        candidat.setAdresse(adresse);
-        candidat.setMail("mailC");
-        candidat.setMotDePasse(passwordEncoder.encode("mdp"));
-
-        candidatRepository.save(candidat);
+        candidatRepository.save( candidatMapper.createCanditatDtoToEntity(createCandidatDto));
     }
 
+	public GetCandidatDto getCandidatById(Long id) {
+		return candidatMapper.candidatEntityToGetDto(candidatRepository.findById(id).get());
+	}
+	
+	public void deleteCandidatById(Long id) {
+		candidatRepository.deleteById(id);
+	}
+	
+	public Candidat updateCandidat(Long id, GetCandidatDto getCandidatDto) {
+		Optional<Candidat> candidatOptional = candidatRepository.findById(id);
+		if (candidatOptional.isPresent()) {
+			// Mot de passe à space depuis le front à valoriser par celui en table avant sauvegarde
+			getCandidatDto.setMotDePasse1(candidatOptional.get().getMotDePasse());
+			// mapper du dto puis sauvegarde de l'adresse avant sauvegarde du donateur
+			Candidat getCandidatMappe = candidatMapper.getCandidatDtoToEntity(getCandidatDto);
+			adresseRepository.save(getCandidatMappe.getAdresse());
+			return candidatRepository.save(getCandidatMappe);	
+		}
+		return null;	
+	}
+
+	
     public String chkCandidatByMail(String mail, String pass) {
         Candidat candidat = candidatRepository.getCandidatByMail(mail);
         if (candidat != null) {

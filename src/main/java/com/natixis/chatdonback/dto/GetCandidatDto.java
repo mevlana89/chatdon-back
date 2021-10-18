@@ -1,40 +1,36 @@
-package com.natixis.chatdonback.entity;
+package com.natixis.chatdonback.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
+
+import com.natixis.chatdonback.entity.Adresse;
+import com.natixis.chatdonback.entity.Candidature;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Slf4j
-public class Candidat extends Utilisateur {
+public class GetCandidatDto {
 
+    private Long id;
+	private String nom;
+    private String prenom;
+    private String mail;
+    private Adresse adresseDTO;
+    private String telephone;
+    private String motDePasse1;
+    private String motDePasse2;
     private String typeHebergement;
-
     private int surfaceHebergement;
-
     private boolean presenceJardin;
-
     private boolean sociableChat;
-
     private boolean sociableChien;
-
     private int nbEnfant;
-
     private int ageBenjamin;
-    
-    @JsonManagedReference
-    @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL)
     private List<Candidature> candidatures;
 
 }
