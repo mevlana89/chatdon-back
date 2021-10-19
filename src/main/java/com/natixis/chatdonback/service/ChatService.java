@@ -3,6 +3,7 @@ package com.natixis.chatdonback.service;
 import java.util.*;
 
 import com.natixis.chatdonback.dto.FilterDto;
+import com.natixis.chatdonback.dto.FilterSuggestionDto;
 import com.natixis.chatdonback.dto.GetChatDto;
 import com.natixis.chatdonback.dto.UpdateChatDto;
 import com.natixis.chatdonback.entity.Candidature;
@@ -76,6 +77,12 @@ public class ChatService {
         return colBoolean;
     }
 
+    public List<Chat> suggestCatsByCandidat(FilterSuggestionDto filterSuggestionDto)
+    {
+        return chatRepo.findAllByCategorieAgeContainingAndRaceContainingAndSexeContainingAndTailleInAndPelageContainingAndCaractereInAndSociableChatInAndSociableChienInAndSociableEnfantInAndZoneGeoContaining
+                (filterSuggestionDto.getCategorieAge(), filterSuggestionDto.getRace(), filterSuggestionDto.getSexe(), filterSuggestionDto.getTaille(), filterSuggestionDto.getPelage(), filterSuggestionDto.getCaractere(), filterSuggestionDto.getSociableChat(), filterSuggestionDto.getSociableChien(), filterSuggestionDto.getSociableEnfant(), filterSuggestionDto.getZoneGeo());
+    }
+
     public Chat updateChat(UpdateChatDto chatDto) {
 
         return chatRepo.save(ChatMapper.updateChatDtoToEntity(chatDto));
@@ -85,4 +92,19 @@ public class ChatService {
     {
         return candidatureRepository.findAllByChatId(id);
     }
+
+    public boolean deleteChatById(int id) {
+        List<Candidature> lstCandidatures = candidatureRepository.findCandidaturesByChat_Id(id);
+        if (lstCandidatures != null) {
+            candidatureRepository.deleteAll(lstCandidatures);
+        }
+        try {
+            chatRepo.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

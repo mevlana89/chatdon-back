@@ -59,4 +59,11 @@ public class ChatController {
     {
         return chatService.findAllCandidaturesByCatId(id);
     }
+
+    @PostMapping("/deleteChatById/{id}")
+    public boolean deleteChatById(@PathVariable int id)
+    {
+        System.out.println("delete ChatBy Id : " + id);
+        return chatService.deleteChatById(id);
+    }
 }

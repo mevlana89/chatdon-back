@@ -1,10 +1,8 @@
 package com.natixis.chatdonback.controller;
 
-import com.natixis.chatdonback.dto.AdresseDTO;
-import com.natixis.chatdonback.dto.CreateCandidatDto;
-import com.natixis.chatdonback.dto.GetCandidatDto;
-import com.natixis.chatdonback.dto.GetDonateurDto;
+import com.natixis.chatdonback.dto.*;
 import com.natixis.chatdonback.entity.Candidat;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.service.CandidatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 //@RequestMapping({ "/candidats" })
@@ -24,22 +24,25 @@ public class CandidatController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-    @PostMapping()
+    @PostMapping("/candidats")
     public void createCandidat(@RequestBody CreateCandidatDto createCandidatDto) {
+    	System.out.println("createCandidat ctrl");
         candidatService.createCandidat (createCandidatDto);
     }
 
     @GetMapping("/getCandidatbyMail")
-    public Candidat getCandidatbyMail(@RequestParam String mail) {
-        return candidatService.getCandidatByMail(mail);
+    public GetCandidatDto getCandidatbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
+    	System.out.println("getCandidatbyMail" + mail);
+        return candidatService.getCandidatByMail(mail, pass);
     }
+
     
-	@GetMapping("/candidat/{id}")
+	@GetMapping("/candidats/{id}")
 	public GetCandidatDto getCandidatById(@PathVariable Long id){
         System.out.println("getCandidatById : " + id);
         try
         {
-        	System.out.println("donateur (get donateur):" + candidatService.getCandidatById(id));
+        	System.out.println("candidat (get candidat):" + candidatService.getCandidatById(id));
           return candidatService.getCandidatById(id);
         } catch (Exception ex) {
             System.out.println("Exception getCandidatById : " + ex.getMessage());
@@ -47,13 +50,13 @@ public class CandidatController {
         }
 	}
 
-	@DeleteMapping("/candidat/{id}")
-	public void deleteDonateurById(@PathVariable Long id){
+	@DeleteMapping("/candidats/{id}")
+	public void deleteCandidatById(@PathVariable Long id){
 	    System.out.println("delete candidat : " + id);
 	    candidatService.deleteCandidatById(id);   
 	}
 	
-	@PostMapping("/candidat/{id}")
+	@PostMapping("/candidats/{id}")
 	public void updateDonateur(@PathVariable Long id, @RequestBody GetCandidatDto getCandidatDto) {
 		System.out.println("updateCandidat" + id);
 		candidatService.updateCandidat(id, getCandidatDto);
@@ -83,5 +86,11 @@ public class CandidatController {
       createCandidatDto.setMotDePasse1(passwordEncoder.encode("mdp"));
       System.out.println("testCreateCandidat");
       candidatService.createCandidat (createCandidatDto);
+    }
+
+    @GetMapping("/candidats/{id}/suggestions")
+    public List<Chat> suggestCatsByCandidatId(FilterSuggestionDto filterSuggestionDto, @PathVariable Long id)
+    {
+        return candidatService.suggestCatsByCandidatId(filterSuggestionDto, id);
     }
 }

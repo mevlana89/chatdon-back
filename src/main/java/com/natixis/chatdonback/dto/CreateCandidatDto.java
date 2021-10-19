@@ -26,8 +26,6 @@ public class CreateCandidatDto extends UtilisateurDTO
 
     private boolean sociableChien;
 
-    private int nbEnfant;
-
     private int ageBenjamin;
     
     private List<Candidature> candidatures;
