@@ -34,7 +34,7 @@ public class CandidatureController {
 
     }
 
-    @PostMapping("/")
+    @PostMapping("/createCandidature")
     public void createCandidatureDto(@RequestBody CreateCandidatureDto createCandidatureDto){
         System.out.println("create candidature");
         candidatureService.CreateCandidature(createCandidatureDto);

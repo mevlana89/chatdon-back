@@ -1,7 +1,9 @@
 package com.natixis.chatdonback.service;
 
 import com.natixis.chatdonback.dto.CreateCandidatureDto;
+import com.natixis.chatdonback.entity.Candidat;
 import com.natixis.chatdonback.entity.Candidature;
+import com.natixis.chatdonback.mapper.CandidatureMapper;
 import com.natixis.chatdonback.repository.CandidatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import java.util.List;
 public class CandidatureService {
     @Autowired
     private CandidatureRepository candidatureRepository;
+
+    @Autowired
+    private CandidatureMapper candidatureMapper;
 
 
     public List<Candidature> findAllCandidaturesByCandidatId (Long candidatId) throws Exception{
@@ -33,10 +38,8 @@ public class CandidatureService {
     }
 
     public void CreateCandidature(CreateCandidatureDto createCandidatureDto){
-        Candidature candidature=new Candidature();
-             //TO DO
-             //recuperer le chat et le candidat a partir des id qui sont dans le dto
-             // creer une nouvelle candidature avec status en cours et le chat et candidat dans la candidature a enregistrer
+        Candidature candidature=candidatureMapper.createCandidatureDtoToEntity(createCandidatureDto);
+        candidatureRepository.save(candidature);
     }
 
 
