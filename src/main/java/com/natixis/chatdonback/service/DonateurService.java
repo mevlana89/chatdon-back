@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.service;
 
 import com.natixis.chatdonback.dto.GetDonateurDto;
+import com.natixis.chatdonback.entity.Candidat;
 import com.natixis.chatdonback.entity.Chat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,8 +62,13 @@ public class DonateurService {
 		return donateurMapper.donateurEntityToGetDto(donateur);
 	}
 
-	public Donateur getDonateurByMail(String nom) {
-		return donateurRepository.getDonateurByMail(nom);
+	public GetDonateurDto getDonateurByMail(String nom, String pass) throws Exception {
+		System.out.println("getDonateurByMail - nom : " + nom );
+		Donateur donateur = donateurRepository.getDonateurByMail(nom);
+		if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
+			return donateurMapper.donateurEntityToGetDto(donateur);
+		}
+		throw new Exception("WrongPass");
 	}
 
 	public String chkDonateurByMail(String mail, String pass) {
