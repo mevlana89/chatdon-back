@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.natixis.chatdonback.dto.FilterDto;
 import com.natixis.chatdonback.dto.FilterSuggestionDto;
+import com.natixis.chatdonback.dto.GetChatDto;
 import com.natixis.chatdonback.dto.UpdateChatDto;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.repository.CandidatureRepository;
@@ -23,6 +24,16 @@ public class ChatService {
 
     @Autowired
     private CandidatureRepository candidatureRepository;
+
+    public GetChatDto getChatDtoById(int id) throws Exception {
+        Optional<Chat> oChat = chatRepo.findById(id);
+        if (oChat.isPresent()) {
+            System.out.println("monChat is present");
+            Chat monChat = oChat.get();
+            return ChatMapper.chatEntityToDto(monChat);
+        }
+        throw new Exception("not found");
+    }
 
     public Chat getChatById(int id) throws Exception {
         Optional<Chat> monChat = chatRepo.findById(id);
@@ -73,6 +84,7 @@ public class ChatService {
     }
 
     public Chat updateChat(UpdateChatDto chatDto) {
+
         return chatRepo.save(ChatMapper.updateChatDtoToEntity(chatDto));
     }
 
@@ -80,4 +92,19 @@ public class ChatService {
     {
         return candidatureRepository.findAllByChatId(id);
     }
+
+    public boolean deleteChatById(int id) {
+        List<Candidature> lstCandidatures = candidatureRepository.findCandidaturesByChat_Id(id);
+        if (lstCandidatures != null) {
+            candidatureRepository.deleteAll(lstCandidatures);
+        }
+        try {
+            chatRepo.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

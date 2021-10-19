@@ -40,8 +40,8 @@ public class GetChatDto {
     
     private boolean sociableChien;
 
-    private Donateur donateur;
+    private GetChatDonateurDto donateur;
 
-    private List<GetPhotoChatDto> lstGetPhotoChatDto;
+    private List<GetPhotoChatDto> lstPhotos;
 
 }

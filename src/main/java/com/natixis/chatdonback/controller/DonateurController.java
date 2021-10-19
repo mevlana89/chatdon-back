@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.controller;
 
+// import org.mapstruct.factory.Mappers;
 import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
@@ -81,8 +82,8 @@ public class DonateurController {
 
 	@GetMapping("/getDonateurbyMail")
 	public GetDonateurDto getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
-		System.out.println("getDonateur pour " + mail);
-		return donateurService.getDonateurByMail(mail, pass);
+    	System.out.println("getCandidatbyMail" + mail);
+        return donateurService.getDonateurByMail(mail, pass);
 	}
 
 

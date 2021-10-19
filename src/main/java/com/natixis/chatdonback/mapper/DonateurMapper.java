@@ -3,6 +3,7 @@ package com.natixis.chatdonback.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.natixis.chatdonback.dto.GetChatDonateurDto;
 import com.natixis.chatdonback.dto.GetDonateurDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -116,5 +117,4 @@ public class DonateurMapper {
         }
         return getDonateurDto;
     }
-
 }

@@ -3,11 +3,9 @@ package com.natixis.chatdonback.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.natixis.chatdonback.dto.CreateChatDto;
-import com.natixis.chatdonback.dto.CreatePhotoChatDto;
-import com.natixis.chatdonback.dto.GetChatDto;
-import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.dto.*;
 import com.natixis.chatdonback.entity.Chat;
+import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.entity.PhotoChat;
 
 public class ChatMapper {
@@ -28,7 +26,7 @@ public class ChatMapper {
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
         leChat.setDonateur(chatDto.getDonateur());
-        leChat.setLstPhotos(PhotoChatMapper.lstPhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
+        leChat.setLstPhotos(PhotoChatMapper.lstGetPhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
         return leChat;
     }
 
@@ -47,7 +45,9 @@ public class ChatMapper {
         leChat.setTaille(chatDto.getTaille());
         leChat.setZoneGeo(chatDto.getZoneGeo());
         leChat.setDonateur(chatDto.getDonateur());
-        leChat.setLstPhotos(PhotoChatMapper.lstPhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
+        System.out.println("createChatDtoToEntity");
+        System.out.println("lstPhotos : " + chatDto.getLstPhotos().size());
+        leChat.setLstPhotos(PhotoChatMapper.lstCreatePhotoChatDtoToEntity(chatDto.getLstPhotos(), leChat));
         return leChat;
     }
 
@@ -66,11 +66,13 @@ public class ChatMapper {
         chatDto.setSociableEnfant(chat.isSociableEnfant());
         chatDto.setTaille(chat.getTaille());
         chatDto.setZoneGeo(chat.getZoneGeo());
-        chatDto.setDonateur(chat.getDonateur());
-        chatDto.setLstGetPhotoChatDto(PhotoChatMapper.lstEntityToGetPhotoChatDto(chat.getLstPhotos(), chatDto));
+        chatDto.setDonateur(donateurEntityToGetChatDonateurDto(chat.getDonateur()));
+        chatDto.setLstPhotos(PhotoChatMapper.lstEntityToGetPhotoChatDto(chat.getLstPhotos(), chatDto));
         return chatDto;
     };
- 
 
-     
+    private static GetChatDonateurDto donateurEntityToGetChatDonateurDto(Donateur donateur) {
+        return new GetChatDonateurDto(donateur.getId(), donateur.getNom(), donateur.getPrenom(), donateur.getMail());
+    }
+
 }
