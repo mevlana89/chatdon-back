@@ -85,4 +85,19 @@ public class ChatService {
     {
         return candidatureRepository.findAllByChatId(id);
     }
+
+    public boolean deleteChatById(int id) {
+        List<Candidature> lstCandidatures = candidatureRepository.findCandidaturesByChat_Id(id);
+        if (lstCandidatures != null) {
+            candidatureRepository.deleteAll(lstCandidatures);
+        }
+        try {
+            chatRepo.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
