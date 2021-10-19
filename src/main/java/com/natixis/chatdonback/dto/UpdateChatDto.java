@@ -40,4 +40,5 @@ public class UpdateChatDto {
     private List<GetPhotoChatDto> lstPhotos;
 
     private Donateur donateur;
+
 }

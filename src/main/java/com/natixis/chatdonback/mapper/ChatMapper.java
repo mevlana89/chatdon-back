@@ -67,14 +67,12 @@ public class ChatMapper {
         chatDto.setTaille(chat.getTaille());
         chatDto.setZoneGeo(chat.getZoneGeo());
         chatDto.setDonateur(donateurEntityToGetChatDonateurDto(chat.getDonateur()));
-        chatDto.setLstGetPhotoChatDto(PhotoChatMapper.lstEntityToGetPhotoChatDto(chat.getLstPhotos(), chatDto));
+        chatDto.setLstPhotos(PhotoChatMapper.lstEntityToGetPhotoChatDto(chat.getLstPhotos(), chatDto));
         return chatDto;
     };
 
     private static GetChatDonateurDto donateurEntityToGetChatDonateurDto(Donateur donateur) {
         return new GetChatDonateurDto(donateur.getId(), donateur.getNom(), donateur.getPrenom(), donateur.getMail());
     }
-
-
 
 }

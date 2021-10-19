@@ -117,13 +117,4 @@ public class DonateurMapper {
         }
         return getDonateurDto;
     }
-
-<<<<<<< HEAD
-    public GetChatDonateurDto donateurEntityToGetChatDonateurDto(Donateur donateur) {
-        return new GetChatDonateurDto(donateur.getId(), donateur.getNom(), donateur.getPrenom(), donateur.getMail());
-    }
-||||||| 76d330f
-
-=======
->>>>>>> main
 }

@@ -42,6 +42,6 @@ public class GetChatDto {
 
     private GetChatDonateurDto donateur;
 
-    private List<GetPhotoChatDto> lstGetPhotoChatDto;
+    private List<GetPhotoChatDto> lstPhotos;
 
 }
