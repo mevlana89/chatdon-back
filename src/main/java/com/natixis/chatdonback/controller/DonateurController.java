@@ -1,8 +1,10 @@
 package com.natixis.chatdonback.controller;
 
 // import org.mapstruct.factory.Mappers;
+import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
-import com.natixis.chatdonback.entity.Adresse;
-import com.natixis.chatdonback.entity.Donateur;
-import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.service.DonateurService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -35,17 +35,23 @@ public class DonateurController {
 
 	@PostMapping("/donateurs")
 	public void createDonateur(@RequestBody CreateDonateurDto donateurDto) {
-		System.out.println("ctrl : save donateur");
+		System.out.println("ctrl : save donateur" + donateurDto.getAdresseDTO() );
 		donateurService.createDonateur(donateurDto);
 	}
 
+	@PostMapping("/donateurs/{id}")
+	public void updateDonateur(@PathVariable Long id, @RequestBody GetDonateurDto getDonateurDto) {
+		System.out.println("updateDonateur" + id);
+		donateurService.updateDonateur(id, getDonateurDto);
+	}
+
 	@GetMapping("/donateurs/{id}")
-	public Donateur getDonateurById(@PathVariable Long id){
+	public GetDonateurDto getDonateurById(@PathVariable Long id){
         System.out.println("getDonateurById : " + id);
         try
         {
-
-            return donateurService.getDonateurById(id);
+        	System.out.println("donateur (get donateur):" + donateurService.getDonateurById(id));
+          return donateurService.getDonateurById(id);
         } catch (Exception ex) {
             System.out.println("Exception getDonateurById : " + ex.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "donateur non trouvé pour id "+id);
@@ -60,18 +66,18 @@ public class DonateurController {
 	
 	@GetMapping("/TestCreationDonateur")
 	public void testCreateDonateur() {
-		CreateDonateurDto donnateurDtoTest = new CreateDonateurDto();
+		CreateDonateurDto donateurDtoTest = new CreateDonateurDto();
 		AdresseDTO adresseDto = new AdresseDTO();
-		donnateurDtoTest.setNom("Dupond");
-		donnateurDtoTest.setPrenom("Jean");
-		donnateurDtoTest.setMail("dupond.jean@orange.fr");
-		donnateurDtoTest.setMotDePasse1(passwordEncoder.encode("mdp"));
-		donnateurDtoTest.setTelephone("00-00-00-00");
+		donateurDtoTest.setNom("Dupond");
+		donateurDtoTest.setPrenom("Jean");
+		donateurDtoTest.setMail("dupond.jean@orange.fr");
+		donateurDtoTest.setMotDePasse1(passwordEncoder.encode("mdp"));
+		donateurDtoTest.setTelephone("00-00-00-00");
 		adresseDto.setRue("10 rue de paris");
 		adresseDto.setCodePostal(75000);
 		adresseDto.setVille("paris");
-		donnateurDtoTest.setAdresseDTO(adresseDto);
-		donateurService.createDonateur(donnateurDtoTest);
+		donateurDtoTest.setAdresseDTO(adresseDto);
+		donateurService.createDonateur(donateurDtoTest);
 	}
 
 	@GetMapping("/getDonateurbyMail")

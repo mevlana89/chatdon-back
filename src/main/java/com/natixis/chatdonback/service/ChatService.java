@@ -3,7 +3,10 @@ package com.natixis.chatdonback.service;
 import java.util.*;
 
 import com.natixis.chatdonback.dto.FilterDto;
+import com.natixis.chatdonback.dto.GetChatDto;
 import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.entity.Candidature;
+import com.natixis.chatdonback.repository.CandidatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +17,22 @@ import com.natixis.chatdonback.repository.ChatRepository;
 
 @Service
 public class ChatService {
-    
+
     @Autowired
     private ChatRepository chatRepo;
+
+    @Autowired
+    private CandidatureRepository candidatureRepository;
+
+    public GetChatDto getChatDtoById(int id) throws Exception {
+        Optional<Chat> oChat = chatRepo.findById(id);
+        if (oChat.isPresent()) {
+            System.out.println("monChat is present");
+            Chat monChat = oChat.get();
+            return ChatMapper.chatEntityToDto(monChat);
+        }
+        throw new Exception("not found");
+    }
 
     public Chat getChatById(int id) throws Exception {
         Optional<Chat> monChat = chatRepo.findById(id);
@@ -61,6 +77,12 @@ public class ChatService {
     }
 
     public Chat updateChat(UpdateChatDto chatDto) {
+
         return chatRepo.save(ChatMapper.updateChatDtoToEntity(chatDto));
+    }
+
+    public List<Candidature> findAllCandidaturesByCatId(int id)
+    {
+        return candidatureRepository.findAllByChatId(id);
     }
 }

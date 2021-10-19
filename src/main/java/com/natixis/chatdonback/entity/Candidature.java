@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Getter
 @Setter
@@ -18,15 +20,16 @@ public class Candidature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int chatId;
+    //private int chatId;
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "chatId",insertable = false, updatable = false)
+    @JoinColumn(name = "chat_id",insertable = false, updatable = false)
     private Chat chat;
 
-    @ManyToOne
-    @JoinColumn(name = "candidatId")
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
+    @JoinColumn(name = "candidat_id",nullable = false)
     private Candidat candidat;
 
 }

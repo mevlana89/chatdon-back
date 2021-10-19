@@ -19,8 +19,6 @@ public class CandidatureController {
     @Autowired
     private CandidatureService candidatureService;
 
-
-
     @GetMapping("/candidats/{candidatId}/candidatures")
     public List<Candidature> findAllCandidaturesByCandidat(@PathVariable Long candidatId){
         System.out.println("findAllCandidaturesByCandidat : " + candidatId);
@@ -36,20 +34,9 @@ public class CandidatureController {
 
     }
 
-    @GetMapping("/chats/{id}/candidatures")
-    public List<Candidature> findAllCandidaturesByCat(@PathVariable Integer chatid){
-        System.out.println("findAllCandidaturesByCat : " + chatid);
-        try{
-            return candidatureService.findAllCandidaturesByCat(chatid);
-        }
-        catch (Exception e){
-            System.out.println("Exception pour la selection des candidatures par candidat:" + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aucune candidature trouvée pour le chat "+chatid);
-        }
-    }
-
-    @PostMapping()
+    @PostMapping("/")
     public void createCandidatureDto(@RequestBody CreateCandidatureDto createCandidatureDto){
+        System.out.println("create candidature");
         candidatureService.CreateCandidature(createCandidatureDto);
     }
 

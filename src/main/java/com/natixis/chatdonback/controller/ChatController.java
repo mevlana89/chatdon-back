@@ -4,7 +4,9 @@ import com.natixis.chatdonback.dto.FilterDto;
 
 import java.util.List;
 
+import com.natixis.chatdonback.dto.GetChatDto;
 import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.entity.Candidature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +24,11 @@ public class ChatController {
     ChatService chatService;
     
     @GetMapping("/getChatByID/{id}")
-    public Chat getChatByID(@PathVariable int id){
+    public GetChatDto getChatByID(@PathVariable int id){
         System.out.println("getChatById : " + id);
             try
             {
-
-                return chatService.getChatById(id);
+                return chatService.getChatDtoById(id);
             } catch (Exception ex) {
                 System.out.println("Exception getChaById : " + ex.getMessage());
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Chat non trouvé pour id "+id);
@@ -49,8 +50,13 @@ public class ChatController {
     @PostMapping("/updateChat")
     public Chat updateChat(@RequestBody UpdateChatDto chatDto) {
         System.out.println("updateChat");
+
         return chatService.updateChat(chatDto);
     }
 
-    
+    @GetMapping("/chats/{id}/candidatures")
+    public List <Candidature> getAllCandidaturesByCatId(@PathVariable int id)
+    {
+        return chatService.findAllCandidaturesByCatId(id);
+    }
 }
