@@ -26,20 +26,23 @@ public class CandidatController {
 
     @PostMapping()
     public void createCandidat(@RequestBody CreateCandidatDto createCandidatDto) {
+    	System.out.println("createCandidat ctrl");
         candidatService.createCandidat (createCandidatDto);
     }
 
     @GetMapping("/getCandidatbyMail")
-    public Candidat getCandidatbyMail(@RequestParam String mail) {
-        return candidatService.getCandidatByMail(mail);
+    public GetCandidatDto getCandidatbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
+    	System.out.println("getCandidatbyMail" + mail);
+        return candidatService.getCandidatByMail(mail, pass);
     }
+
     
-	@GetMapping("/candidat/{id}")
+	@GetMapping("/candidats/{id}")
 	public GetCandidatDto getCandidatById(@PathVariable Long id){
         System.out.println("getCandidatById : " + id);
         try
         {
-        	System.out.println("donateur (get donateur):" + candidatService.getCandidatById(id));
+        	System.out.println("candidat (get candidat):" + candidatService.getCandidatById(id));
           return candidatService.getCandidatById(id);
         } catch (Exception ex) {
             System.out.println("Exception getCandidatById : " + ex.getMessage());
@@ -47,13 +50,13 @@ public class CandidatController {
         }
 	}
 
-	@DeleteMapping("/candidat/{id}")
-	public void deleteDonateurById(@PathVariable Long id){
+	@DeleteMapping("/candidats/{id}")
+	public void deleteCandidatById(@PathVariable Long id){
 	    System.out.println("delete candidat : " + id);
 	    candidatService.deleteCandidatById(id);   
 	}
 	
-	@PostMapping("/candidat/{id}")
+	@PostMapping("/candidats/{id}")
 	public void updateDonateur(@PathVariable Long id, @RequestBody GetCandidatDto getCandidatDto) {
 		System.out.println("updateCandidat" + id);
 		candidatService.updateCandidat(id, getCandidatDto);

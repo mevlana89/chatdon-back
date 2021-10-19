@@ -29,8 +29,6 @@ public class Candidat extends Utilisateur {
 
     private boolean sociableChien;
 
-    private int nbEnfant;
-
     private int ageBenjamin;
     
     @JsonManagedReference
