@@ -81,13 +81,9 @@ public class DonateurController {
 	}
 
 	@GetMapping("/getDonateurbyMail")
-	public Donateur getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
-		System.out.println("getDonateur pour " + mail);
-		Donateur donateur = donateurService.getDonateurByMail(mail);
-		if (passwordEncoder.matches(pass, donateur.getMotDePasse())) {
-			return donateurService.getDonateurByMail(mail);
-		}
-		throw new Exception("WrongPass");
+	public GetDonateurDto getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
+    	System.out.println("getCandidatbyMail" + mail);
+        return donateurService.getDonateurByMail(mail, pass);
 	}
 
 
