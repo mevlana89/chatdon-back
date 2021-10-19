@@ -24,7 +24,7 @@ public class CandidatController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-    @PostMapping()
+    @PostMapping("/candidats")
     public void createCandidat(@RequestBody CreateCandidatDto createCandidatDto) {
     	System.out.println("createCandidat ctrl");
         candidatService.createCandidat (createCandidatDto);
