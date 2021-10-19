@@ -45,7 +45,6 @@ public class CandidatMapper {
 	    candidat.setTypeHebergement(createCandidatDto.getTypeHebergement());;
 	    candidat.setPresenceJardin(createCandidatDto.isPresenceJardin());
 	    candidat.setSurfaceHebergement(createCandidatDto.getSurfaceHebergement());
-	    candidat.setNbEnfant(createCandidatDto.getNbEnfant());
 	    candidat.setAgeBenjamin(createCandidatDto.getAgeBenjamin());
 	    candidat.setSociableChat(createCandidatDto.isSociableChat());
 	    candidat.setSociableChien(createCandidatDto.isSociableChien());
@@ -86,7 +85,6 @@ public class CandidatMapper {
 
         candidat.setTypeHebergement(getCandidatDto.getTypeHebergement());
         candidat.setSurfaceHebergement(getCandidatDto.getSurfaceHebergement());
-        candidat.setNbEnfant(getCandidatDto.getNbEnfant());
         candidat.setAgeBenjamin(getCandidatDto.getAgeBenjamin());
         candidat.setPresenceJardin(getCandidatDto.isPresenceJardin());
         candidat.setSociableChat(getCandidatDto.isSociableChat());
@@ -118,7 +116,6 @@ public class CandidatMapper {
 	    
 	    getCandidatDto.setTypeHebergement(candidat.getTypeHebergement());
 	    getCandidatDto.setSurfaceHebergement(candidat.getSurfaceHebergement());
-	    getCandidatDto.setNbEnfant(candidat.getNbEnfant());
 	    getCandidatDto.setAgeBenjamin(candidat.getAgeBenjamin());
 	    getCandidatDto.setPresenceJardin(candidat.isPresenceJardin());
 	    getCandidatDto.setSociableChat(candidat.isSociableChat());
