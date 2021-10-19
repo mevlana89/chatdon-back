@@ -1,10 +1,8 @@
 package com.natixis.chatdonback.controller;
 
-import com.natixis.chatdonback.dto.AdresseDTO;
-import com.natixis.chatdonback.dto.CreateCandidatDto;
-import com.natixis.chatdonback.dto.GetCandidatDto;
-import com.natixis.chatdonback.dto.GetDonateurDto;
+import com.natixis.chatdonback.dto.*;
 import com.natixis.chatdonback.entity.Candidat;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.service.CandidatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 //@RequestMapping({ "/candidats" })
@@ -86,5 +86,11 @@ public class CandidatController {
       createCandidatDto.setMotDePasse1(passwordEncoder.encode("mdp"));
       System.out.println("testCreateCandidat");
       candidatService.createCandidat (createCandidatDto);
+    }
+
+    @GetMapping("/candidats/{id}/suggestions")
+    public List<Chat> suggestCatsByCandidatId(FilterSuggestionDto filterSuggestionDto, @PathVariable Long id)
+    {
+        return candidatService.suggestCatsByCandidatId(filterSuggestionDto, id);
     }
 }
