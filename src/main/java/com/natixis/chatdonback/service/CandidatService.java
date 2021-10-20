@@ -89,15 +89,6 @@ public class CandidatService {
 
     private FilterSuggestionDto algoSuggestionsCats(Candidat candidat, FilterSuggestionDto filterSuggestionDto)
     {
-
-        // initialisation du filtre avant le dev du front
-        filterSuggestionDto.setCategorieAge("");
-        filterSuggestionDto.setPelage("");
-        filterSuggestionDto.setSexe("");
-        filterSuggestionDto.setZoneGeo("");
-        //filterSuggestionDto.setZoneGeo(candidat.getAdresse().getCodePostal());
-        filterSuggestionDto.setRace("");
-
         //initialisation du filtre
         List <String> caractere = new ArrayList<>();
         caractere.add("calme");
