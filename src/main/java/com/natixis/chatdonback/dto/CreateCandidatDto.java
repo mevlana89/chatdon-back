@@ -28,6 +28,6 @@ public class CreateCandidatDto extends UtilisateurDTO
 
     private int ageBenjamin;
     
-    private List<Candidature> candidatures;
+    //private List<Candidature> candidatures;
 
 }

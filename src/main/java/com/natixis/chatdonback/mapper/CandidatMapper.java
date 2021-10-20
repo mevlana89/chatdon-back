@@ -49,10 +49,10 @@ public class CandidatMapper {
 	    candidat.setSociableChat(createCandidatDto.isSociableChat());
 	    candidat.setSociableChien(createCandidatDto.isSociableChien());
 	    
-	    List<Candidature> listCandidatures = createCandidatDto.getCandidatures();
-	    if ( listCandidatures != null ) {
-	       candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
-	    }
+//	    List<Candidature> listCandidatures = createCandidatDto.getCandidatures();
+//	    if ( listCandidatures != null ) {
+//	       candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
+//	    }
 	    
 		return candidat;
 	}
