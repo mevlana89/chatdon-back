@@ -2,6 +2,7 @@ package com.natixis.chatdonback.controller;
 
 
 import com.natixis.chatdonback.dto.CreateCandidatureDto;
+import com.natixis.chatdonback.dto.GetCandidatureDto;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.service.CandidatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,10 @@ public class CandidatureController {
         candidatureService.deleteCandidatureById(id);
     }
 
-
+    @PostMapping("/editCandidature")
+    public void editCandidature(@RequestBody GetCandidatureDto getCandidatureDto) {
+        System.out.println("edit Candidature ");
+        candidatureService.editCandidature(getCandidatureDto);
+    }
 
 }
