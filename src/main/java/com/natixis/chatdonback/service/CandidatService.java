@@ -58,6 +58,7 @@ public class CandidatService {
     public String chkCandidatByMail(String mail, String pass) {
         Candidat candidat = candidatRepository.getCandidatByMail(mail);
         if (candidat != null) {
+        	System.out.println("comparo de : " + pass + " vs encoded : " + candidat.getMotDePasse());
             if (passwordEncoder.matches(pass, candidat.getMotDePasse())) {
                 return "Candidat";
             }
