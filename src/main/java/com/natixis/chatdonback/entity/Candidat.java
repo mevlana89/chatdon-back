@@ -1,5 +1,6 @@
 package com.natixis.chatdonback.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,8 @@ public class Candidat extends Utilisateur {
 
     private int ageBenjamin;
     
-    @JsonManagedReference
+    
+    @JsonBackReference
     @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL)
     private List<Candidature> candidatures;
 
