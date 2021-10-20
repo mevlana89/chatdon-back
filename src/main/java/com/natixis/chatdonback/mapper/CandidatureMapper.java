@@ -37,6 +37,9 @@ public class CandidatureMapper {
         candidatureDto.setStatus(candidature.getStatus());
         Candidat candidat = new Candidat();
         candidat.setId(candidature.getCandidat().getId());
+        candidat.setNom(candidature.getCandidat().getNom());
+        candidat.setPrenom(candidature.getCandidat().getPrenom());
+        candidat.setMail(candidature.getCandidat().getMail());
         candidatureDto.setCandidat(candidatMapper.candidatEntityToGetDto(candidat));
         System.out.println("id_chat "+candidature.getChat().getId());
         return candidatureDto;
