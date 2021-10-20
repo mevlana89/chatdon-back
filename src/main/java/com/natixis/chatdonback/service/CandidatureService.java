@@ -21,13 +21,9 @@ public class CandidatureService {
     private CandidatureMapper candidatureMapper;
 
 
-    public List<Candidature> findAllCandidaturesByCandidatId (Long candidatId) throws Exception{
+    public List<Candidature> findAllCandidaturesByCandidatId (Long candidatId) {
         List<Candidature> myCandidatures = candidatureRepository.findCandidaturesByCandidat_Id(candidatId);
-        if (myCandidatures.size()!=0) {
             return myCandidatures;
-        }
-        throw new Exception("No Candidatures to return");
-
     }
 
     public List<Candidature> findAllCandidaturesByCat (Integer chatId) throws Exception{
