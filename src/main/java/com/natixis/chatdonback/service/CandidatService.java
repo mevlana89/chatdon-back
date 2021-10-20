@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.natixis.chatdonback.dto.FilterSuggestionDto;
-import com.natixis.chatdonback.entity.Chat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.natixis.chatdonback.dto.CreateCandidatDto;
+import com.natixis.chatdonback.dto.FilterSuggestionDto;
 import com.natixis.chatdonback.dto.GetCandidatDto;
-import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Candidat;
-import com.natixis.chatdonback.entity.Donateur;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.mapper.CandidatMapper;
 import com.natixis.chatdonback.repository.AdresseRepository;
 import com.natixis.chatdonback.repository.CandidatRepository;
@@ -45,9 +43,10 @@ public class CandidatService {
 		Optional<Candidat> candidatOptional = candidatRepository.findById(id);
 		if (candidatOptional.isPresent()) {
 			// Mot de passe à space depuis le front à valoriser par celui en table avant sauvegarde
-			getCandidatDto.setMotDePasse1(candidatOptional.get().getMotDePasse());
-			// mapper du dto puis sauvegarde de l'adresse avant sauvegarde du donateur
+			//getCandidatDto.setMotDePasse1(candidatOptional.get().getMotDePasse());
+			// mapper du dto puis sauvegarde de l'adresse avant sauvegarde du candidat
 			Candidat getCandidatMappe = candidatMapper.getCandidatDtoToEntity(getCandidatDto);
+			getCandidatMappe.setMotDePasse(candidatOptional.get().getMotDePasse());
 			adresseRepository.save(getCandidatMappe.getAdresse());
 			return candidatRepository.save(getCandidatMappe);	
 		}

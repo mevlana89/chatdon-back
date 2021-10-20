@@ -1,17 +1,26 @@
 package com.natixis.chatdonback.controller;
 
-import com.natixis.chatdonback.dto.*;
-import com.natixis.chatdonback.entity.Candidat;
-import com.natixis.chatdonback.entity.Chat;
-import com.natixis.chatdonback.entity.Donateur;
-import com.natixis.chatdonback.service.CandidatService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import com.natixis.chatdonback.dto.AdresseDTO;
+import com.natixis.chatdonback.dto.CreateCandidatDto;
+import com.natixis.chatdonback.dto.FilterSuggestionDto;
+import com.natixis.chatdonback.dto.GetCandidatDto;
+import com.natixis.chatdonback.entity.Chat;
+import com.natixis.chatdonback.service.CandidatService;
 
 @RestController
 //@RequestMapping({ "/candidats" })
@@ -46,7 +55,7 @@ public class CandidatController {
           return candidatService.getCandidatById(id);
         } catch (Exception ex) {
             System.out.println("Exception getCandidatById : " + ex.getMessage());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "donateur non trouvé pour id "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "candidat non trouvé pour id "+id);
         }
 	}
 
@@ -57,14 +66,14 @@ public class CandidatController {
 	}
 	
 	@PostMapping("/candidats/{id}")
-	public void updateDonateur(@PathVariable Long id, @RequestBody GetCandidatDto getCandidatDto) {
+	public void updateCandidat(@PathVariable Long id, @RequestBody GetCandidatDto getCandidatDto) {
 		System.out.println("updateCandidat" + id);
 		candidatService.updateCandidat(id, getCandidatDto);
 	}
 
     // methodes de tests
 	@GetMapping("/TestDeleteCandidat/{id}")
-	public void testDeleteDonateurById(@PathVariable Long id) {
+	public void testDeleteCandidatById(@PathVariable Long id) {
 		candidatService.deleteCandidatById(id);
 	}
 
@@ -82,8 +91,11 @@ public class CandidatController {
       createCandidatDto.setNom("Bond");
       createCandidatDto.setPrenom("James");
       createCandidatDto.setAdresseDTO(adresse);
-      createCandidatDto.setMail("mailC");
+      createCandidatDto.setMail("mail@test.fr");
       createCandidatDto.setMotDePasse1(passwordEncoder.encode("mdp"));
+      createCandidatDto.setSurfaceHebergement(79);
+      createCandidatDto.setAgeBenjamin(14);
+      createCandidatDto.setTypeHebergement("Maison");
       System.out.println("testCreateCandidat");
       candidatService.createCandidat (createCandidatDto);
     }

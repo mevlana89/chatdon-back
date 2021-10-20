@@ -1,27 +1,26 @@
 package com.natixis.chatdonback.controller;
 
-// import org.mapstruct.factory.Mappers;
-import com.natixis.chatdonback.dto.GetDonateurDto;
-import com.natixis.chatdonback.entity.Chat;
-import com.natixis.chatdonback.entity.Donateur;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
+// import org.mapstruct.factory.Mappers;
+import com.natixis.chatdonback.dto.GetDonateurDto;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.service.DonateurService;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -82,7 +81,7 @@ public class DonateurController {
 
 	@GetMapping("/getDonateurbyMail")
 	public GetDonateurDto getDonateurbyMail(@RequestParam String mail, @RequestParam String pass) throws Exception {
-    	System.out.println("getCandidatbyMail" + mail);
+    	System.out.println("getDonateurbyMail" + mail);
         return donateurService.getDonateurByMail(mail, pass);
 	}
 
