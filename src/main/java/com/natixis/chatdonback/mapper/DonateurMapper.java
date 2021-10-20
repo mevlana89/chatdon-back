@@ -3,14 +3,13 @@ package com.natixis.chatdonback.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.natixis.chatdonback.dto.GetChatDonateurDto;
-import com.natixis.chatdonback.dto.GetDonateurDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.natixis.chatdonback.dto.AdresseDTO;
 import com.natixis.chatdonback.dto.CreateDonateurDto;
+import com.natixis.chatdonback.dto.GetDonateurDto;
 import com.natixis.chatdonback.entity.Adresse;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
