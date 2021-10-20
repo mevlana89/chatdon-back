@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.mapper;
 
 import com.natixis.chatdonback.dto.CreateCandidatureDto;
+import com.natixis.chatdonback.dto.GetCandidatureDto;
 import com.natixis.chatdonback.entity.Candidat;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.entity.Chat;
@@ -36,8 +37,20 @@ public class CandidatureMapper {
         candidatureDto.setStatus(candidature.getStatus());
         Candidat candidat = new Candidat();
         candidat.setId(candidature.getCandidat().getId());
+        candidat.setNom(candidature.getCandidat().getNom());
+        candidat.setPrenom(candidature.getCandidat().getPrenom());
+        candidat.setMail(candidature.getCandidat().getMail());
         candidatureDto.setCandidat(candidatMapper.candidatEntityToGetDto(candidat));
         System.out.println("id_chat "+candidature.getChat().getId());
         return candidatureDto;
+    }
+
+    public Candidature getCandidatureDtoToEntity(GetCandidatureDto getCandidatureDto) {
+        Candidature candidature = new Candidature();
+        candidature.setId(getCandidatureDto.getId());
+        candidature.setCandidat(candidatMapper.getCandidatDtoToEntity(getCandidatureDto.getCandidat()));
+        candidature.setChat(getCandidatureDto.getChat());
+        candidature.setStatus(getCandidatureDto.getStatus());
+        return candidature;
     }
 }

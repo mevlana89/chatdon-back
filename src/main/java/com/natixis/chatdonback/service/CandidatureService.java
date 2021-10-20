@@ -1,6 +1,7 @@
 package com.natixis.chatdonback.service;
 
 import com.natixis.chatdonback.dto.CreateCandidatureDto;
+import com.natixis.chatdonback.dto.GetCandidatureDto;
 import com.natixis.chatdonback.entity.Candidat;
 import com.natixis.chatdonback.entity.Candidature;
 import com.natixis.chatdonback.mapper.CandidatureMapper;
@@ -43,6 +44,9 @@ public class CandidatureService {
     }
 
 
-
-
+    public void editCandidature(GetCandidatureDto getCandidatureDto) {
+        Candidature candidature = candidatureMapper.getCandidatureDtoToEntity(getCandidatureDto);
+        System.out.println("candidature à éditer : id = " + candidature.getId() + " id candidat " + candidature.getCandidat().getId()+" statut : " + candidature.getStatus());
+        candidatureRepository.save(candidature);
+    }
 }
