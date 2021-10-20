@@ -1,20 +1,19 @@
 package com.natixis.chatdonback.service;
 
-import com.natixis.chatdonback.dto.GetDonateurDto;
-import com.natixis.chatdonback.entity.Candidat;
-import com.natixis.chatdonback.entity.Chat;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.natixis.chatdonback.dto.CreateDonateurDto;
+import com.natixis.chatdonback.dto.GetDonateurDto;
+import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.entity.Donateur;
 import com.natixis.chatdonback.mapper.DonateurMapper;
 import com.natixis.chatdonback.repository.AdresseRepository;
 import com.natixis.chatdonback.repository.DonateurRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DonateurService {
@@ -39,9 +38,10 @@ public class DonateurService {
 		Optional<Donateur> donateurOptional = donateurRepository.findById(id);
 		if (donateurOptional.isPresent()) {
 			// Mot de passe à space depuis le front à valoriser par celui en table avant sauvegarde
-			getDonateurDto.setMotDePasse1(donateurOptional.get().getMotDePasse());
+			//getDonateurDto.setMotDePasse1(donateurOptional.get().getMotDePasse());
 			// mapper du dto puis sauvegarde de l'adresse avant sauvegarde du donateur
 			Donateur getDonateurMappe = donateurMapper.getDonateurDtoToEntity(getDonateurDto);
+			getDonateurMappe.setMotDePasse(donateurOptional.get().getMotDePasse());
 			adresseRepository.save(getDonateurMappe.getAdresse());
 			return donateurRepository.save(getDonateurMappe);	
 		}
