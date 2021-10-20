@@ -1,18 +1,15 @@
 package com.natixis.chatdonback.controller;
 
-import com.natixis.chatdonback.dto.FilterDto;
+import com.natixis.chatdonback.dto.*;
 
 import java.util.List;
 
-import com.natixis.chatdonback.dto.GetChatDto;
-import com.natixis.chatdonback.dto.UpdateChatDto;
 import com.natixis.chatdonback.entity.Candidature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.natixis.chatdonback.dto.CreateChatDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.service.ChatService;
 
@@ -58,6 +55,12 @@ public class ChatController {
     public List <Candidature> getAllCandidaturesByCatId(@PathVariable int id)
     {
         return chatService.findAllCandidaturesByCatId(id);
+    }
+
+    @GetMapping("/chats/{id}/candidaturesDto")
+    public List <CreateCandidatureDto> getAllCreateCandidaturesDtoByCatId(@PathVariable int id)
+    {
+        return chatService.findAllCreateCandidaturesDtoByCatId(id);
     }
 
     @PostMapping("/deleteChatById/{id}")

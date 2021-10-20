@@ -2,15 +2,13 @@ package com.natixis.chatdonback.service;
 
 import java.util.*;
 
-import com.natixis.chatdonback.dto.FilterDto;
-import com.natixis.chatdonback.dto.GetChatDto;
-import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.dto.*;
 import com.natixis.chatdonback.entity.Candidature;
+import com.natixis.chatdonback.mapper.CandidatureMapper;
 import com.natixis.chatdonback.repository.CandidatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.natixis.chatdonback.dto.CreateChatDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.mapper.ChatMapper;
 import com.natixis.chatdonback.repository.ChatRepository;
@@ -23,6 +21,9 @@ public class ChatService {
 
     @Autowired
     private CandidatureRepository candidatureRepository;
+
+    @Autowired
+    private CandidatureMapper candidatureMapper;
 
     public GetChatDto getChatDtoById(int id) throws Exception {
         Optional<Chat> oChat = chatRepo.findById(id);
@@ -76,6 +77,12 @@ public class ChatService {
         return colBoolean;
     }
 
+    public List<Chat> suggestCatsByCandidat(FilterSuggestionDto filterSuggestionDto)
+    {
+        return chatRepo.findAllByCategorieAgeContainingAndRaceContainingAndSexeContainingAndTailleInAndPelageContainingAndCaractereInAndSociableChatInAndSociableChienInAndSociableEnfantInAndZoneGeoContaining
+                (filterSuggestionDto.getCategorieAge(), filterSuggestionDto.getRace(), filterSuggestionDto.getSexe(), filterSuggestionDto.getTaille(), filterSuggestionDto.getPelage(), filterSuggestionDto.getCaractere(), filterSuggestionDto.getSociableChat(), filterSuggestionDto.getSociableChien(), filterSuggestionDto.getSociableEnfant(), filterSuggestionDto.getZoneGeo());
+    }
+
     public Chat updateChat(UpdateChatDto chatDto) {
 
         return chatRepo.save(ChatMapper.updateChatDtoToEntity(chatDto));
@@ -100,4 +107,12 @@ public class ChatService {
         }
     }
 
+    public List<CreateCandidatureDto> findAllCreateCandidaturesDtoByCatId(int id) {
+        List<Candidature> lstCandidatures = candidatureRepository.findAllByChatId(id);
+        List<CreateCandidatureDto> lstCandidaturesDto = new ArrayList<>();
+        for (Candidature candidature : lstCandidatures) {
+            lstCandidaturesDto.add(candidatureMapper.createEntityToDto(candidature));
+        }
+        return lstCandidaturesDto;
+    }
 }

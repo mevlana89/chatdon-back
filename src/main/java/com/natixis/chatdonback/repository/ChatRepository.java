@@ -12,4 +12,8 @@ import java.util.List;
 public interface ChatRepository extends JpaRepository<Chat, Integer> {
     List<Chat> findAllByCategorieAgeContainingAndRaceContainingAndSexeContainingAndTailleContainingAndPelageContainingAndCaractereContainingAndSociableChatInAndSociableChienInAndSociableEnfantInAndZoneGeoContaining
             (String categorieAge, String race, String sexe, String taille, String pelage, String caractere, Collection<Boolean> sociableChat, Collection<Boolean> sociableChien, Collection<Boolean> sociableEnfant, String zoneGeo);
+
+    List<Chat> findAllByCategorieAgeContainingAndRaceContainingAndSexeContainingAndTailleInAndPelageContainingAndCaractereInAndSociableChatInAndSociableChienInAndSociableEnfantInAndZoneGeoContaining
+            (String categorieAge, String race, String sexe, Collection <String> taille, String pelage, Collection <String> caractere, Collection<Boolean> sociableChat, Collection<Boolean> sociableChien, Collection<Boolean> sociableEnfant, String zoneGeo);
+
 }
