@@ -69,4 +69,10 @@ public class ChatController {
         System.out.println("delete ChatBy Id : " + id);
         return chatService.deleteChatById(id);
     }
+
+
+    @GetMapping("/chats/{id}/donnerChat")
+    public void donnerChat (@PathVariable int id){
+        chatService.donnerChat(id);
+    }
 }

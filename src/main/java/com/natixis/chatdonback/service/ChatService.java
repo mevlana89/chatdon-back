@@ -115,4 +115,14 @@ public class ChatService {
         }
         return lstCandidaturesDto;
     }
+
+    public void donnerChat(int id){
+        Optional<Chat> oChat = chatRepo.findById(id);
+        if (oChat.isPresent()) {
+            Chat monChat = oChat.get();
+            List<Candidature> can = candidatureRepository.findCandidaturesByChat_Id(monChat.getId());
+            candidatureRepository.deleteAll(can);
+            chatRepo.delete(monChat);
+        }
+    }
 }
