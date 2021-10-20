@@ -2,16 +2,13 @@ package com.natixis.chatdonback.service;
 
 import java.util.*;
 
-import com.natixis.chatdonback.dto.FilterDto;
-import com.natixis.chatdonback.dto.FilterSuggestionDto;
-import com.natixis.chatdonback.dto.GetChatDto;
-import com.natixis.chatdonback.dto.UpdateChatDto;
+import com.natixis.chatdonback.dto.*;
 import com.natixis.chatdonback.entity.Candidature;
+import com.natixis.chatdonback.mapper.CandidatureMapper;
 import com.natixis.chatdonback.repository.CandidatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.natixis.chatdonback.dto.CreateChatDto;
 import com.natixis.chatdonback.entity.Chat;
 import com.natixis.chatdonback.mapper.ChatMapper;
 import com.natixis.chatdonback.repository.ChatRepository;
@@ -24,6 +21,9 @@ public class ChatService {
 
     @Autowired
     private CandidatureRepository candidatureRepository;
+
+    @Autowired
+    private CandidatureMapper candidatureMapper;
 
     public GetChatDto getChatDtoById(int id) throws Exception {
         Optional<Chat> oChat = chatRepo.findById(id);
@@ -107,4 +107,12 @@ public class ChatService {
         }
     }
 
+    public List<CreateCandidatureDto> findAllCreateCandidaturesDtoByCatId(int id) {
+        List<Candidature> lstCandidatures = candidatureRepository.findAllByChatId(id);
+        List<CreateCandidatureDto> lstCandidaturesDto = new ArrayList<>();
+        for (Candidature candidature : lstCandidatures) {
+            lstCandidaturesDto.add(candidatureMapper.createEntityToDto(candidature));
+        }
+        return lstCandidaturesDto;
+    }
 }

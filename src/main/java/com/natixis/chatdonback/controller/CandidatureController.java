@@ -37,7 +37,13 @@ public class CandidatureController {
     @PostMapping("/createCandidature")
     public void createCandidatureDto(@RequestBody CreateCandidatureDto createCandidatureDto){
         System.out.println("create candidature");
-        candidatureService.CreateCandidature(createCandidatureDto);
+        candidatureService.createCandidature(createCandidatureDto);
+    }
+
+    @DeleteMapping("/candidatures/{id}")
+    public void deleteCandidatureById(@PathVariable Integer id){
+        System.out.println("delete candidat : " + id);
+        candidatureService.deleteCandidatureById(id);
     }
 
 

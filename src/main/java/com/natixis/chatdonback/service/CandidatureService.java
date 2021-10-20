@@ -37,9 +37,13 @@ public class CandidatureService {
         throw new Exception("No Candidatures to return");
     }
 
-    public void CreateCandidature(CreateCandidatureDto createCandidatureDto){
+    public void createCandidature(CreateCandidatureDto createCandidatureDto){
         Candidature candidature=candidatureMapper.createCandidatureDtoToEntity(createCandidatureDto);
         candidatureRepository.save(candidature);
+    }
+
+    public void deleteCandidatureById(Integer id){
+        candidatureRepository.deleteById(id);
     }
 
 

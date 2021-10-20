@@ -168,10 +168,10 @@ public class CandidatService {
 	public GetCandidatDto getCandidatByMail(String nom, String pass) throws Exception {
 		System.out.println("getCandidatByMail - nom : " + nom );
 		Candidat candidat = candidatRepository.getCandidatByMail(nom);
-		if (passwordEncoder.matches(pass, candidat.getMotDePasse())) {
+		//if (passwordEncoder.matches(pass, candidat.getMotDePasse())) {
 			return candidatMapper.candidatEntityToGetDto(candidat);
-		}
-		throw new Exception("WrongPass");
+		//}
+		//throw new Exception("WrongPass");
 	}
 
 }

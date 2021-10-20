@@ -24,7 +24,8 @@ public class Candidature {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "chat_id",insertable = false, updatable = false)
+    @JoinColumn(name = "chat_id")
+   // @JoinColumn(name = "chat_id",insertable = false, updatable = false)
     private Chat chat;
 
     @JsonBackReference
