@@ -30,6 +30,6 @@ public class GetCandidatDto {
     private boolean sociableChat;
     private boolean sociableChien;
     private int ageBenjamin;
-    private List<Candidature> candidatures;
+  //  private List<Candidature> candidatures;
 
 }

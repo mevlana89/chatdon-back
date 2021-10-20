@@ -90,10 +90,10 @@ public class CandidatMapper {
         candidat.setSociableChat(getCandidatDto.isSociableChat());
         candidat.setSociableChien(getCandidatDto.isSociableChien());
 	    
-        List<Candidature> listCandidatures = getCandidatDto.getCandidatures();
-	    if ( listCandidatures != null ) {
-	       candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
-	    }
+       // List<Candidature> listCandidatures = getCandidatDto.getCandidatures();
+	   // if ( listCandidatures != null ) {
+	    //   candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
+	    //}
 	    
         return candidat;
     }
@@ -121,10 +121,10 @@ public class CandidatMapper {
 	    getCandidatDto.setSociableChat(candidat.isSociableChat());
 	    getCandidatDto.setSociableChien(candidat.isSociableChien());
 	    
-        List<Candidature> listCandidatures = getCandidatDto.getCandidatures();
-	    if ( listCandidatures != null ) {
-	       candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
-	    }
+      //  List<Candidature> listCandidatures = getCandidatDto.getCandidatures();
+	   // if ( listCandidatures != null ) {
+	    //   candidat.setCandidatures( new ArrayList<Candidature>( listCandidatures ) );
+	   // }
 	    
 	    return getCandidatDto;
 	}

@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 @Component
 public class CandidatureMapper {
+
+    @Autowired
+    CandidatMapper candidatMapper;
+
     public Candidature createCandidatureDtoToEntity(CreateCandidatureDto createCandidatureDto){
         if (createCandidatureDto == null) {
             return null;
@@ -20,7 +24,7 @@ public class CandidatureMapper {
         Candidature candidature = new Candidature();
         candidature.setChat(createCandidatureDto.getChat());
         candidature.setStatus(createCandidatureDto.getStatus());
-        candidature.setCandidat(createCandidatureDto.getCandidat());
+        candidature.setCandidat(candidatMapper.getCandidatDtoToEntity(createCandidatureDto.getCandidat()));
         System.out.println("id_chat "+candidature.getChat().getId());
         return candidature;
     }
@@ -32,7 +36,7 @@ public class CandidatureMapper {
         candidatureDto.setStatus(candidature.getStatus());
         Candidat candidat = new Candidat();
         candidat.setId(candidature.getCandidat().getId());
-        candidatureDto.setCandidat(candidat);
+        candidatureDto.setCandidat(candidatMapper.candidatEntityToGetDto(candidat));
         System.out.println("id_chat "+candidature.getChat().getId());
         return candidatureDto;
     }

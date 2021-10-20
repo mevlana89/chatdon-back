@@ -14,5 +14,5 @@ public class CreateCandidatureDto {
     private int id;
     private Chat chat;
     private String status="En cours";
-    private Candidat candidat;
+    private GetCandidatDto candidat;
 }
