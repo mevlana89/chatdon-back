@@ -16,6 +16,12 @@ public class ChatMapper {
         leChat.setCaractere(chatDto.getCaractere());
         leChat.setCategorieAge(chatDto.getCategorieAge());
         leChat.setDescriptif(chatDto.getDescriptif());
+        if (chatDto.getDescriptif() != null) {
+            System.out.println("descriptif non null, length : " + leChat.getDescriptif().length());
+            if (leChat.getDescriptif().length() > 255) {
+                leChat.setDescriptif(chatDto.getDescriptif().substring(0, 255));
+            }
+        }
         leChat.setSociableChat(chatDto.isSociableChat());
         leChat.setId(chatDto.getId());
         leChat.setPelage(chatDto.getPelage());
@@ -36,6 +42,12 @@ public class ChatMapper {
         leChat.setCaractere(chatDto.getCaractere());
         leChat.setCategorieAge(chatDto.getCategorieAge());
         leChat.setDescriptif(chatDto.getDescriptif());
+        if (chatDto.getDescriptif() != null) {
+            System.out.println("descriptif non null, length : " + leChat.getDescriptif().length());
+            if (leChat.getDescriptif().length() > 255) {
+                leChat.setDescriptif(chatDto.getDescriptif().substring(0, 255));
+            }
+        }
         leChat.setSociableChat(chatDto.isSociableChat());
         leChat.setPelage(chatDto.getPelage());
         leChat.setRace(chatDto.getRace());
